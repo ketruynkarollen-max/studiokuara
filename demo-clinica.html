@@ -1,0 +1,3135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Saúde Total - Cuidando de Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: #fff;
+            color: #333;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .preloader-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Header Novo - Estilo AmorSaúde */
+        .header-top {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-new {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #55B7C5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #55B7C5;
+        }
+
+        .nav-menu-new {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu-new a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #55B7C5;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-menu-new a:hover {
+            color: #3a9aa7;
+            text-decoration: underline;
+        }
+
+        /* Segunda Linha - Categorias */
+        .header-categories {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .header-categories-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            gap: 1rem;
+        }
+
+        .categories-list {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            overflow-x: auto;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #55B7C5;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: color 0.2s;
+        }
+
+        .category-item:hover {
+            color: #3a9aa7;
+        }
+
+        .category-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-cta-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #EF4444;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+        }
+
+        .btn-cta-header:hover {
+            background: #dc2626;
+            transform: scale(1.02);
+        }
+
+        /* Badge Flutuante */
+        .floating-badge {
+            position: fixed;
+            right: 1rem;
+            top: 10rem;
+            width: 56px;
+            height: 56px;
+            background: #EF4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+            z-index: 999;
+        }
+
+        .floating-badge:hover {
+            transform: scale(1.06);
+        }
+
+        /* Menu Mobile */
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            color: #55B7C5;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Mobile Menu Overlay & Drawer */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-overlay.open {
+            opacity: 1;
+        }
+        .mobile-menu-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(320px, 85vw);
+            max-width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 1002;
+            padding: 1.25rem 1.5rem;
+            padding-top: max(1.25rem, env(safe-area-inset-top));
+            padding-right: max(1.5rem, env(safe-area-inset-right));
+            box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mobile-menu-drawer.open {
+            transform: translateX(0);
+        }
+        .mobile-menu-drawer .drawer-close {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            color: #55B7C5;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: auto;
+            margin-bottom: 1rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mobile-menu-drawer nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .mobile-menu-drawer nav a {
+            display: block;
+            padding: 0.875rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #55B7C5;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background 0.2s, color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mobile-menu-drawer nav a:hover,
+        .mobile-menu-drawer nav a:focus {
+            background: rgba(85, 183, 197, 0.12);
+            color: #3a9aa7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0066cc;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #0066cc;
+        }
+
+        .btn-agendar {
+            padding: 0.75rem 2rem;
+            background: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-agendar:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Estilo AmorSaúde */
+        .hero-amor {
+            position: relative;
+            min-height: 90vh;
+            background: linear-gradient(90deg, #0EA5A4 0%, #22C55E 50%, #16A34A 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero-amor::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.03);
+            z-index: 1;
+        }
+
+        .hero-amor-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-amor-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .hero-amor-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #fff;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        .pelo-app-badge {
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border: 3px solid #fff;
+            border-radius: 50px;
+            font-size: 0.85em;
+            margin-left: 0.5rem;
+            background: transparent;
+        }
+
+        .hero-amor-cta {
+            background: #fff;
+            color: #0EA5A4;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            align-self: flex-start;
+        }
+
+        .hero-amor-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-amor-logos {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .logo-badge i {
+            font-size: 1.5rem;
+        }
+
+        /* Coluna Direita - Imagem */
+        .hero-amor-image {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 600px;
+        }
+
+        /* Anel Circular Decorativo */
+        .hero-circle-ring {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 3px solid rgba(74, 222, 128, 0.4);
+            border-radius: 50%;
+            animation: rotateRing 20s linear infinite;
+            filter: blur(1px);
+        }
+
+        @keyframes rotateRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Imagem Principal */
+        .hero-main-person {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Ícones Flutuantes */
+        .floating-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        /* Cruz Médica - Topo Direita */
+        .icon-medic {
+            top: 10%;
+            right: -5%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.95), rgba(34, 197, 94, 0.95));
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.5);
+            animation: floatIcon1 4s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Cifrão - Meio Esquerda */
+        .icon-money {
+            top: 30%;
+            left: -8%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.95), rgba(34, 197, 94, 0.95));
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.5);
+            animation: floatIcon2 5s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(15px) rotate(-5deg); }
+        }
+
+        /* Dente - Inferior Direita */
+        .icon-tooth {
+            bottom: 15%;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.95), rgba(34, 197, 94, 0.95));
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.5);
+            animation: floatIcon3 4.5s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon3 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(8deg); }
+        }
+
+        /* Check - Inferior Direita */
+        .icon-check {
+            bottom: 10%;
+            right: 15%;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.95));
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.5);
+            animation: floatIcon4 3.5s ease-in-out infinite;
+            font-size: 1.8rem;
+        }
+
+        @keyframes floatIcon4 {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(15px) scale(1.05); }
+        }
+
+        /* Pílula - Topo Esquerda */
+        .icon-pill {
+            top: 8%;
+            left: 10%;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(243, 244, 246, 0.95));
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+            animation: floatIcon5 5.5s ease-in-out infinite;
+            color: #0EA5A4;
+        }
+
+        @keyframes floatIcon5 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-8px, 15px); }
+        }
+
+        /* Indicadores de Slide */
+        .hero-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 20;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s;
+        }
+
+        .indicator.active {
+            width: 30px;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #0066cc;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #0066cc, #0099ff);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            margin-top: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0066cc, #0099ff);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0,102,204,0.2);
+        }
+
+        .service-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #0066cc, #0099ff);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.8rem;
+            font-size: 2.8rem;
+            color: #fff;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .service-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+            opacity: 0.3;
+            filter: blur(10px);
+            transition: all 0.4s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg) scale(1.1);
+        }
+
+        .service-card:hover .service-icon::after {
+            opacity: 0.6;
+            filter: blur(15px);
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Doctors */
+        .doctors {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .doctor-card {
+            background: #fff;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .doctor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,102,204,0.05), rgba(0,153,255,0.05));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1;
+        }
+
+        .doctor-card:hover::before {
+            opacity: 1;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,102,204,0.15);
+        }
+
+        .doctor-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .doctor-card:hover .doctor-image {
+            transform: scale(1.1);
+        }
+
+        .doctor-info {
+            padding: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .doctor-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #0066cc;
+            font-weight: 700;
+        }
+
+        .doctor-info p {
+            color: #666;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .doctor-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .specialty-tag {
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, #e6f2ff, #f0f7ff);
+            color: #0066cc;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0,102,204,0.2);
+        }
+
+        /* Appointment */
+        .appointment {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .appointment::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .appointment::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .appointment-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .appointment-form {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            padding: 3.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.22);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group select,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .form-group select option {
+            background: #0066cc;
+            color: #fff;
+        }
+
+        .form-group textarea {
+            grid-column: 1 / -1;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.4rem;
+            background: #fff;
+            color: #0066cc;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .btn-submit:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-submit i {
+            font-size: 1.2rem;
+        }
+
+        /* Convenios */
+        .convenios {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .convenios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .convenio-item {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .convenio-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,102,204,0.15);
+        }
+
+        .convenio-item i {
+            font-size: 3.2rem;
+            color: #0066cc;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .convenio-item:hover i {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .convenio-item p {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        /* Security Badge */
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 80px 0;
+            background: #fff;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border-radius: 50px;
+            border: 2px solid #e6f2ff;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .badge-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,102,204,0.1);
+            border-color: #0066cc;
+        }
+
+        .badge-item i {
+            font-size: 2.2rem;
+            color: #26de81;
+        }
+
+        .badge-info h4 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .badge-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.8rem;
+            color: #0099ff;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-col a:hover {
+            color: #0099ff;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        .security-footer {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .security-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #26de81;
+            font-size: 0.95rem;
+        }
+
+        .security-item i {
+            font-size: 1.3rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25d366, #20ba5a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            z-index: 1000;
+            animation: pulse-whats 2s infinite;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+        }
+
+        @keyframes pulse-whats {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+            }
+        }
+
+        /* Seção de Unidades - Estilo AmorSaúde */
+        .unidades-section {
+            background: linear-gradient(180deg, #A8E6E3 0%, #E6F6F8 100%);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unidades-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .unidades-image-wrapper {
+            position: relative;
+            height: 100%;
+            min-height: 600px;
+        }
+
+        .unidades-image {
+            position: relative;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .unidades-image-placeholder {
+            position: relative;
+            height: 100%;
+            min-height: 600px;
+            background: linear-gradient(135deg, #7DD3C0, #52B7A8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 3rem;
+        }
+
+        /* Barra de Unidades (Sobreposta na base) */
+        .unidades-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0EA5A4;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            z-index: 10;
+        }
+
+        .unidades-bar-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .unidades-bar-content {
+            flex: 1;
+        }
+
+        .unidades-bar-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .unidades-cidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 3rem;
+        }
+
+        .cidade-item {
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .cidade-nome {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cidade-estado {
+            font-size: 0.75rem;
+            opacity: 0.85;
+        }
+
+        /* Coluna Direita - Texto */
+        .unidades-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            padding: 4rem 5rem 4rem 3rem;
+        }
+
+        .unidades-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #EF4444;
+        }
+
+        .unidades-title-destaque {
+            font-size: 4.5rem;
+            display: block;
+            font-weight: 900;
+        }
+
+        .unidades-cta {
+            background: transparent;
+            color: #EF4444;
+            border: 2px solid #EF4444;
+            padding: 1.2rem 2.5rem;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .unidades-cta:hover {
+            background: #EF4444;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Seção de Estatísticas */
+        .stats-section {
+            background: white;
+            padding: 4rem 3rem;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            background: #EF4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #7DD3C0;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #EF4444;
+            line-height: 1.4;
+        }
+
+        /* Seção Tour 360 */
+        .tour360-section {
+            background: white;
+            padding: 5rem 3rem;
+            position: relative;
+        }
+
+        .tour360-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tour360-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tour360-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            color: #7CBEC6;
+        }
+
+        .tour360-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #EF4444;
+        }
+
+        .tour360-video-wrapper {
+            position: relative;
+        }
+
+        .tour360-card {
+            position: relative;
+            aspect-ratio: 16/10;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tour360-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            transform: scale(1.02);
+        }
+
+        .tour360-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #7DD3C0, #52C4B8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tour360-bg i {
+            font-size: 10rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tour360-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(82, 196, 184, 0.3);
+            backdrop-filter: blur(2px);
+        }
+
+        .tour360-label {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .tour360-label-small {
+            font-size: 0.9rem;
+        }
+
+        .tour360-label-big {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .tour360-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-play 2s ease-in-out infinite;
+            transition: all 0.3s;
+        }
+
+        .tour360-card:hover .tour360-play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .tour360-play-inner {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tour360-play-icon {
+            width: 0;
+            height: 0;
+            border-left: 20px solid #EF4444;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        @keyframes pulse-play {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        .tour360-badge-icon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: #EF4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Seção Excelência + Mascote */
+        .excellence-section {
+            background: white;
+            padding: 0 3rem 5rem;
+        }
+
+        .excellence-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .excellence-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .excellence-content {
+            flex: 1;
+        }
+
+        .excellence-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #EF4444;
+            margin-bottom: 0.75rem;
+        }
+
+        .excellence-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .excellence-badges {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .badge-seal {
+            width: 80px;
+            height: 96px;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            padding: 0.75rem 0.5rem;
+        }
+
+        .badge-green {
+            background: linear-gradient(135deg, #22C55E, #16A34A);
+        }
+
+        .badge-blue {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+        }
+
+        .badge-seal-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .badge-seal-text {
+            font-size: 0.65rem;
+            line-height: 1.2;
+        }
+
+        .badge-seal-year {
+            font-size: 0.55rem;
+            margin-top: 0.25rem;
+            opacity: 0.9;
+        }
+
+        .mascot-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .mascot-container {
+            position: relative;
+        }
+
+        .mascot-placeholder {
+            font-size: 12rem;
+            line-height: 1;
+        }
+
+        .mascot-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .mascot-shadow {
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8rem;
+            height: 2rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        /* Barra de Preços */
+        .pricing-bar {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1.5rem 3rem;
+        }
+
+        .pricing-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pricing-info-icon {
+            width: 40px;
+            height: 40px;
+            background: #E6F6F8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0EA5A4;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-info-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .pricing-info-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .pricing-info-subtitle {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .pricing-items {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-item {
+            text-align: center;
+        }
+
+        .pricing-item-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            color: #0EA5A4;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.03em;
+        }
+
+        .pricing-item-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .pricing-item-currency {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Seção de Áreas de Atuação */
+        .specialties-section {
+            background: white;
+            padding: 5rem 3rem;
+        }
+
+        .specialties-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .specialties-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #7CBEC6;
+        }
+
+        .btn-schedule {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid #EF4444;
+            border-radius: 8px;
+            color: #EF4444;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-schedule:hover {
+            background: #EF4444;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .specialties-grid {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .specialty-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .specialty-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .specialty-name {
+            padding: 1.5rem;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #7CBEC6;
+        }
+
+        .btn-view-more {
+            display: block;
+            margin: 0 auto;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid #7CBEC6;
+            border-radius: 8px;
+            color: #7CBEC6;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-view-more:hover {
+            background: #7CBEC6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 190, 198, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-amor-title {
+                font-size: 3rem;
+            }
+
+            .hero-amor-content {
+                gap: 3rem;
+            }
+
+            .unidades-container {
+                gap: 3rem;
+            }
+
+            .unidades-title {
+                font-size: 3rem;
+            }
+
+            .unidades-title-destaque {
+                font-size: 3.5rem;
+            }
+
+            /* Header */
+            .nav-menu-new {
+                gap: 1.5rem;
+            }
+
+            .nav-menu-new a {
+                font-size: 0.75rem;
+            }
+
+            .header-categories-content {
+                padding: 0 1.5rem;
+            }
+
+            .categories-list {
+                gap: 1.5rem;
+            }
+
+            .services-grid,
+            .doctors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-overlay,
+            .mobile-menu-drawer {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Header */
+            .header-top-content {
+                padding: 0 1rem;
+            }
+
+            .nav-menu-new {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-menu-overlay {
+                display: block !important;
+            }
+            .mobile-menu-drawer {
+                display: block !important;
+            }
+
+            .header-categories-content {
+                padding: 0 1rem;
+            }
+
+            .categories-list {
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 2px;
+            }
+            .categories-list::-webkit-scrollbar {
+                display: none;
+            }
+
+            .category-item {
+                padding: 0.5rem 0;
+            }
+            .category-item span {
+                display: none;
+            }
+
+            .btn-cta-header {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .floating-badge {
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+                right: 0.75rem;
+            }
+            .hero-amor {
+                min-height: auto;
+                padding: 3rem 0;
+            }
+
+            .hero-amor-content {
+                grid-template-columns: 1fr;
+                padding: 0 2rem;
+                gap: 3rem;
+            }
+
+            .hero-amor-text {
+                text-align: center;
+                align-items: center;
+            }
+
+            .hero-amor-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-amor-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-amor-logos {
+                justify-content: center;
+            }
+
+            .hero-amor-image {
+                height: 500px;
+            }
+
+            .hero-main-person {
+                width: 300px;
+                height: 400px;
+            }
+
+            .hero-main-person i {
+                font-size: 8rem !important;
+            }
+
+            .hero-circle-ring {
+                width: 400px;
+                height: 400px;
+            }
+
+            .floating-icon {
+                font-size: 1.5rem;
+            }
+
+            .icon-medic,
+            .icon-money,
+            .icon-tooth {
+                width: 60px;
+                height: 60px;
+            }
+
+            .icon-check,
+            .icon-pill {
+                width: 50px;
+                height: 50px;
+            }
+
+            /* Unidades Section */
+            .unidades-section {
+                padding: 0;
+            }
+
+            .unidades-container {
+                grid-template-columns: 1fr;
+                gap: 0;
+                min-height: auto;
+            }
+
+            .unidades-image-wrapper {
+                min-height: 500px;
+            }
+
+            .unidades-image-placeholder {
+                min-height: 500px;
+            }
+
+            .unidades-content {
+                text-align: center;
+                align-items: center;
+                padding: 3rem 2rem;
+            }
+
+            .unidades-title {
+                font-size: 2.5rem;
+            }
+
+            .unidades-title-destaque {
+                font-size: 3rem;
+            }
+
+            .unidades-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            .unidades-bar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .unidades-cidades {
+                gap: 1rem;
+            }
+
+            /* Stats Section */
+            .stats-section {
+                padding: 3rem 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            /* Tour 360 */
+            .tour360-section {
+                padding: 3rem 2rem;
+            }
+
+            .tour360-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .tour360-text {
+                text-align: center;
+            }
+
+            .tour360-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .tour360-title {
+                font-size: 3rem;
+            }
+
+            .tour360-badge-icon {
+                top: 1rem;
+                right: 1rem;
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+
+            /* Excellence Section */
+            .excellence-section {
+                padding: 0 2rem 3rem;
+            }
+
+            .excellence-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .excellence-card {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .excellence-badges {
+                justify-content: center;
+            }
+
+            .mascot-wrapper {
+                justify-content: center;
+            }
+
+            .mascot-placeholder {
+                font-size: 8rem;
+            }
+
+            /* Pricing Bar */
+            .pricing-bar {
+                padding: 1.5rem 2rem;
+            }
+
+            .pricing-container {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+
+            .pricing-items {
+                width: 100%;
+                justify-content: space-between;
+                gap: 1.5rem;
+            }
+
+            .pricing-item-label {
+                font-size: 0.7rem;
+            }
+
+            .pricing-item-value {
+                font-size: 1.25rem;
+            }
+
+            /* Specialties */
+            .specialties-section {
+                padding: 3rem 2rem;
+            }
+
+            .specialties-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .specialties-title {
+                font-size: 2.5rem;
+            }
+
+            .specialties-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .services-grid,
+            .doctors-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .convenios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .appointment-form {
+                padding: 2.5rem 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-amor-title {
+                font-size: 2rem;
+            }
+
+            .pelo-app-badge {
+                display: block;
+                margin: 0.5rem auto 0;
+                width: fit-content;
+            }
+
+            .hero-amor-cta {
+                font-size: 1rem;
+                padding: 1rem 2rem;
+            }
+
+            .logo-badge {
+                font-size: 0.85rem;
+            }
+
+            .hero-amor-image {
+                height: 400px;
+            }
+
+            .hero-main-person {
+                width: 250px;
+                height: 350px;
+            }
+
+            .hero-main-person i {
+                font-size: 6rem !important;
+            }
+
+            .hero-circle-ring {
+                width: 300px;
+                height: 300px;
+            }
+
+            .floating-icon {
+                font-size: 1.2rem;
+            }
+
+            .icon-medic,
+            .icon-money,
+            .icon-tooth {
+                width: 50px;
+                height: 50px;
+            }
+
+            .icon-check,
+            .icon-pill {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Unidades Section */
+            .unidades-image-wrapper {
+                min-height: 400px;
+            }
+
+            .unidades-image-placeholder {
+                min-height: 400px;
+            }
+
+            .unidades-content {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .unidades-title {
+                font-size: 2rem;
+            }
+
+            .unidades-title-destaque {
+                font-size: 2.5rem;
+            }
+
+            .unidades-cta {
+                font-size: 0.85rem;
+                padding: 1rem 2rem;
+            }
+
+            .unidades-cidades {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            /* Stats Section */
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.95rem;
+            }
+
+            /* Tour 360 */
+            .tour360-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .tour360-title {
+                font-size: 2.5rem;
+            }
+
+            .tour360-label {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .tour360-label-small {
+                font-size: 0.75rem;
+            }
+
+            .tour360-label-big {
+                font-size: 1.5rem;
+            }
+
+            .tour360-play-button {
+                width: 80px;
+                height: 80px;
+            }
+
+            .tour360-play-inner {
+                width: 54px;
+                height: 54px;
+            }
+
+            /* Excellence */
+            .excellence-title {
+                font-size: 1.25rem;
+            }
+
+            .excellence-text {
+                font-size: 0.85rem;
+            }
+
+            .badge-seal {
+                width: 70px;
+                height: 84px;
+            }
+
+            .mascot-placeholder {
+                font-size: 6rem;
+            }
+
+            /* Pricing Bar */
+            .pricing-container {
+                gap: 1.5rem;
+            }
+
+            .pricing-items {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .pricing-item {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .pricing-item-label {
+                text-align: left;
+            }
+
+            /* Specialties */
+            .specialties-title {
+                font-size: 2rem;
+            }
+
+            .specialties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .specialty-image {
+                height: 240px;
+            }
+
+            .convenios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .appointment-form {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <!-- Logo -->
+            <a href="#" class="logo-new">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">Saúde Total</span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-menu-new">
+                <li><a href="#quem-somos">Quem Somos</a></li>
+                <li><a href="#unidades">Unidades</a></li>
+                <li><a href="#telemedicina">Telemedicina</a></li>
+                <li><a href="#ajuda">Ajuda</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#trabalhe">Trabalhe Conosco</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay & Drawer -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
+    <div class="mobile-menu-drawer" id="mobileMenuDrawer" aria-hidden="true">
+        <button type="button" class="drawer-close" id="mobileMenuClose" aria-label="Fechar menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav>
+            <a href="#quem-somos" class="mobile-nav-link">Quem Somos</a>
+            <a href="#unidades" class="mobile-nav-link">Unidades</a>
+            <a href="#telemedicina" class="mobile-nav-link">Telemedicina</a>
+            <a href="#ajuda" class="mobile-nav-link">Ajuda</a>
+            <a href="#blog" class="mobile-nav-link">Blog</a>
+            <a href="#trabalhe" class="mobile-nav-link">Trabalhe Conosco</a>
+            <a href="#agendamento" class="mobile-nav-link">Agendar Consulta</a>
+        </nav>
+    </div>
+
+    <!-- Header Categories Bar -->
+    <div class="header-categories">
+        <div class="header-categories-content">
+            <!-- Categorias com Ícones -->
+            <div class="categories-list">
+                <a href="#medicina" class="category-item">
+                    <i class="fas fa-heartbeat category-icon"></i>
+                    <span>Medicina</span>
+                </a>
+                <a href="#odontologia" class="category-item">
+                    <i class="fas fa-tooth category-icon"></i>
+                    <span>Odontologia</span>
+                </a>
+                <a href="#exames" class="category-item">
+                    <i class="fas fa-file-medical category-icon"></i>
+                    <span>Exames</span>
+                </a>
+                <a href="#cirurgias" class="category-item">
+                    <i class="fas fa-user-md category-icon"></i>
+                    <span>Cirurgias</span>
+                </a>
+            </div>
+
+            <!-- Botão CTA -->
+            <button class="btn-cta-header" onclick="document.getElementById('agendamento').scrollIntoView({behavior:'smooth'})">
+                <i class="fas fa-calendar-alt"></i>
+                Marque sua consulta
+            </button>
+        </div>
+    </div>
+
+    <!-- Badge Flutuante Lateral -->
+    <div class="floating-badge">
+        <i class="fas fa-share-alt"></i>
+    </div>
+
+    <!-- Hero - Estilo AmorSaúde -->
+    <section class="hero-amor" id="home">
+        <div class="hero-amor-content">
+            <!-- Coluna Esquerda - Textos -->
+            <div class="hero-amor-text" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-amor-title">
+                    Já é filiado do Cartão de TODOS?
+                    <br>
+                    Agende sua consulta direto <span class="pelo-app-badge">pelo app</span>
+                </h1>
+                
+                <button class="hero-amor-cta" onclick="document.getElementById('agendamento').scrollIntoView({behavior:'smooth'})">
+                    Fácil e Rápido! Aproveite todas as vantagens.
+                </button>
+
+                <div class="hero-amor-logos">
+                    <div class="logo-badge">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Saúde Total</span>
+                    </div>
+                    <div class="logo-badge">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Cartão TODOS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Direita - Imagem com Elementos Flutuantes -->
+            <div class="hero-amor-image" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <!-- Anel Circular Rotativo -->
+                <div class="hero-circle-ring"></div>
+
+                <!-- Imagem Principal -->
+                <div class="hero-main-person">
+                    <i class="fas fa-user-nurse" style="font-size: 12rem; color: rgba(255,255,255,0.9);"></i>
+                </div>
+
+                <!-- Ícones Flutuantes -->
+                <div class="floating-icon icon-medic">
+                    <i class="fas fa-plus"></i>
+                </div>
+
+                <div class="floating-icon icon-money">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+
+                <div class="floating-icon icon-tooth">
+                    <i class="fas fa-tooth"></i>
+                </div>
+
+                <div class="floating-icon icon-check">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <div class="floating-icon icon-pill">
+                    <i class="fas fa-pills"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicadores de Slide -->
+        <div class="hero-indicators">
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator active"></span>
+        </div>
+    </section>
+
+    <!-- Seção de Unidades - Estilo AmorSaúde -->
+    <section class="unidades-section">
+        <div class="unidades-container">
+            <!-- Coluna Esquerda - Imagem com Barra -->
+            <div class="unidades-image-wrapper" data-aos="fade-right" data-aos-duration="1000">
+                <div class="unidades-image">
+                    <!-- Imagem Principal -->
+                    <div class="unidades-image-placeholder">
+                        <div style="text-align: center;">
+                            <i class="fas fa-hospital-alt" style="font-size: 10rem; display: block; margin-bottom: 1.5rem; opacity: 0.9;"></i>
+                            <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">AmorSaúde</div>
+                            <p style="font-size: 1rem; font-weight: 500; opacity: 0.9;">Unidade Moderna</p>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Unidades (Sobreposta) -->
+                    <div class="unidades-bar" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="unidades-bar-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+
+                        <div class="unidades-bar-content">
+                            <h3 class="unidades-bar-title">Nossas últimas unidades</h3>
+
+                            <div class="unidades-cidades">
+                                <div class="cidade-item">
+                                    <span class="cidade-nome">Campo Grande</span>
+                                    <span class="cidade-estado">RJ</span>
+                                </div>
+                                <div class="cidade-item">
+                                    <span class="cidade-nome">Londrina</span>
+                                    <span class="cidade-estado">PR</span>
+                                </div>
+                                <div class="cidade-item">
+                                    <span class="cidade-nome">Foz do Iguaçu</span>
+                                    <span class="cidade-estado">PR</span>
+                                </div>
+                                <div class="cidade-item">
+                                    <span class="cidade-nome">São João de Meriti</span>
+                                    <span class="cidade-estado">RJ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna Direita - Texto e CTA -->
+            <div class="unidades-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <h2 class="unidades-title">
+                    São mais de
+                    <span class="unidades-title-destaque">500 unidades</span>
+                    espalhadas em
+                    todo o Brasil.
+                </h2>
+
+                <button class="unidades-cta" onclick="alert('Funcionalidade em desenvolvimento!')">
+                    Encontre agora sua unidade
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <!-- Stat 1 -->
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-number">500</div>
+                <div class="stat-label">unidades em<br>funcionamento</div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <div class="stat-number">37</div>
+                <div class="stat-label">áreas de atuação</div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number">+de 1,5 mi</div>
+                <div class="stat-label">atendimentos<br>por mês</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Tour 360 -->
+    <section class="tour360-section">
+        <div class="tour360-container">
+            <!-- Coluna Esquerda - Textos -->
+            <div class="tour360-text" data-aos="fade-up" data-aos-duration="1000">
+                <p class="tour360-subtitle">
+                    Dê um zoom nos detalhes, navegue pelos corredores e sinta-se como se estivesse aqui.
+                </p>
+                <h2 class="tour360-title">
+                    Faça um<br>Tour 360.
+                </h2>
+            </div>
+
+            <!-- Coluna Direita - Card do Vídeo -->
+            <div class="tour360-video-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="tour360-card" onclick="alert('Tour 360° - Em desenvolvimento!')">
+                    <!-- Background -->
+                    <div class="tour360-bg">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+
+                    <!-- Overlay -->
+                    <div class="tour360-overlay"></div>
+
+                    <!-- Label "Passeio Virtual 360°" -->
+                    <div class="tour360-label">
+                        <div class="tour360-label-small">Passeio</div>
+                        <div class="tour360-label-small">Virtual</div>
+                        <div class="tour360-label-big">360°</div>
+                    </div>
+
+                    <!-- Botão Play -->
+                    <div class="tour360-play-button">
+                        <div class="tour360-play-inner">
+                            <div class="tour360-play-icon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ícone Badge Flutuante -->
+        <div class="tour360-badge-icon">
+            <i class="fas fa-check"></i>
+        </div>
+    </section>
+
+    <!-- Seção Excelência + Mascote -->
+    <section class="excellence-section">
+        <div class="excellence-container">
+            <!-- Card de Excelência -->
+            <div class="excellence-card" data-aos="fade-up" data-aos-duration="1000">
+                <div class="excellence-content">
+                    <h3 class="excellence-title">AmorSaúde: Excelência reconhecida</h3>
+                    <p class="excellence-text">
+                        Premiada pelo Reclame Aqui 2024 e Great Place to Work. Garantindo um Ambiente de Trabalho e Atendimento Excepcionais.
+                    </p>
+                </div>
+
+                <!-- Badges/Selos -->
+                <div class="excellence-badges">
+                    <!-- Selo Empresa Campeã -->
+                    <div class="badge-seal badge-green">
+                        <div class="badge-seal-icon">😊</div>
+                        <div class="badge-seal-text">
+                            EMPRESA<br>CAMPEÃ
+                        </div>
+                        <div class="badge-seal-year">RA 2024</div>
+                    </div>
+
+                    <!-- Selo Great Place to Work -->
+                    <div class="badge-seal badge-blue">
+                        <div class="badge-seal-icon">⭐⭐</div>
+                        <div class="badge-seal-text" style="font-size: 0.55rem;">
+                            GREAT<br>PEOPLE
+                        </div>
+                        <div class="badge-seal-year">2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mascote 3D -->
+            <div class="mascot-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="mascot-container">
+                    <img src="./imagens-projetos/medy.png" alt="Mascote Medy" class="mascot-image" style="max-width: 100%; height: auto;">
+                    <div class="mascot-shadow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra de Preços -->
+    <section class="pricing-bar">
+        <div class="pricing-container">
+            <!-- Info Tabela -->
+            <div class="pricing-info">
+                <div class="pricing-info-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="pricing-info-text">
+                    <div class="pricing-info-title">Tabela nacional de</div>
+                    <div class="pricing-info-subtitle">consultas médicas:</div>
+                </div>
+            </div>
+
+            <!-- Preços -->
+            <div class="pricing-items">
+                <div class="pricing-item">
+                    <div class="pricing-item-label">Cartão de TODOS</div>
+                    <div class="pricing-item-value">
+                        <span class="pricing-item-currency">R$</span> 30,00
+                    </div>
+                </div>
+
+                <div class="pricing-item">
+                    <div class="pricing-item-label">Clínica Geral</div>
+                    <div class="pricing-item-value">
+                        <span class="pricing-item-currency">R$</span> 30,00
+                    </div>
+                </div>
+
+                <div class="pricing-item">
+                    <div class="pricing-item-label">Demais Áreas</div>
+                    <div class="pricing-item-value">
+                        <span class="pricing-item-currency">R$</span> 40,00
+                    </div>
+                </div>
+
+                <div class="pricing-item">
+                    <div class="pricing-item-label">Particular</div>
+                    <div class="pricing-item-value">
+                        <span class="pricing-item-currency">R$</span> 60,00
+                    </div>
+                </div>
+
+                <div class="pricing-item">
+                    <div class="pricing-item-label">2ª em diante</div>
+                    <div class="pricing-item-value">
+                        <span class="pricing-item-currency">R$</span> 120,00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Áreas de Atuação -->
+    <section class="specialties-section">
+        <div class="specialties-header">
+            <h2 class="specialties-title" data-aos="fade-right">Nossas áreas de atuação</h2>
+            <button class="btn-schedule" data-aos="fade-left" onclick="document.getElementById('agendamento').scrollIntoView({behavior:'smooth'})">
+                Agende sua consulta
+            </button>
+        </div>
+
+        <div class="specialties-grid">
+            <!-- Card 1 - Clínico Geral -->
+            <div class="specialty-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop" alt="Clínico Geral" class="specialty-image">
+                <div class="specialty-name">Clínico Geral</div>
+            </div>
+
+            <!-- Card 2 - Cardiologia -->
+            <div class="specialty-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=400&h=400&fit=crop" alt="Cardiologia" class="specialty-image">
+                <div class="specialty-name">Cardiologia</div>
+            </div>
+
+            <!-- Card 3 - Oftalmologia -->
+            <div class="specialty-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://images.unsplash.com/photo-1584467541268-b040f83be3fd?w=400&h=400&fit=crop" alt="Oftalmologia" class="specialty-image">
+                <div class="specialty-name">Oftalmologia</div>
+            </div>
+
+            <!-- Card 4 - Ginecologia -->
+            <div class="specialty-card" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=400&fit=crop" alt="Ginecologia" class="specialty-image">
+                <div class="specialty-name">Ginecologia</div>
+            </div>
+
+            <!-- Card 5 - Odontologia -->
+            <div class="specialty-card" data-aos="fade-up" data-aos-delay="500">
+                <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=400&fit=crop" alt="Odontologia" class="specialty-image">
+                <div class="specialty-name">Odontologia</div>
+            </div>
+        </div>
+
+        <button class="btn-view-more" data-aos="fade-up">
+            Veja mais áreas de atuação
+        </button>
+    </section>
+
+    <!-- Appointment -->
+    <section class="appointment" id="agendamento">
+        <div class="container">
+            <div class="appointment-content">
+                <h2 class="section-title" style="color: #fff;" data-aos="fade-up">Agende Sua Consulta</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);" data-aos="fade-up" data-aos-delay="100">Preencha o formulário e entraremos em contato</p>
+                <form class="appointment-form" data-aos="fade-up" data-aos-delay="200">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nome Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Telefone/WhatsApp" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Especialidade</option>
+                                <option>Cardiologia</option>
+                                <option>Pediatria</option>
+                                <option>Clínica Geral</option>
+                                <option>Ortopedia</option>
+                                <option>Ginecologia</option>
+                                <option>Outra</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Período Preferido</option>
+                                <option>Manhã (7h-12h)</option>
+                                <option>Tarde (13h-18h)</option>
+                                <option>Noite (18h-20h)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Observações (opcional)"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-calendar-check"></i> Confirmar Agendamento
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Convenios -->
+    <section class="convenios" id="convenios">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Convênios Aceitos</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Trabalhamos com os principais planos de saúde</p>
+            <div class="convenios-grid">
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Unimed</p>
+                </div>
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="150">
+                    <i class="fas fa-hospital"></i>
+                    <p>Bradesco</p>
+                </div>
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-medkit"></i>
+                    <p>SulAmérica</p>
+                </div>
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="250">
+                    <i class="fas fa-heartbeat"></i>
+                    <p>Amil</p>
+                </div>
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-stethoscope"></i>
+                    <p>Porto Seguro</p>
+                </div>
+                <div class="convenio-item" data-aos="zoom-in" data-aos-delay="350">
+                    <i class="fas fa-user-md"></i>
+                    <p>NotreDame</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Badges -->
+    <section class="security-badges">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <div class="badge-item" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="badge-info">
+                        <h4>Site Seguro</h4>
+                        <p>SSL Certificado</p>
+                    </div>
+                </div>
+                <div class="badge-item" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-lock"></i>
+                    <div class="badge-info">
+                        <h4>Dados Protegidos</h4>
+                        <p>LGPD Compliant</p>
+                    </div>
+                </div>
+                <div class="badge-item" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="badge-info">
+                        <h4>Certificado ANS</h4>
+                        <p>Registro Ativo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clínica Saúde Total</h4>
+                    <p style="color: #999; line-height: 1.8;">
+                        Cuidando da sua saúde com excelência há mais de 20 anos. Atendimento humanizado e tecnologia de ponta.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#medicos">Equipe Médica</a></li>
+                        <li><a href="#convenios">Convênios</a></li>
+                        <li><a href="#agendamento">Agendar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> (11) 3333-3333</li>
+                        <li><i class="fas fa-envelope"></i> contato@saudetotal.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000<br>São Paulo - SP</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Horário de Funcionamento</h4>
+                    <ul>
+                        <li>Segunda a Sexta: 7h - 20h</li>
+                        <li>Sábado: 8h - 14h</li>
+                        <li>Emergência 24h</li>
+                        <li style="margin-top: 1rem;">
+                            <a href="https://wa.me/5511999999999" target="_blank" style="background: #25d366; color: #fff; padding: 0.75rem 1.5rem; border-radius: 50px; display: inline-block; margin-top: 1rem;">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="security-footer">
+                <div class="security-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Site Seguro SSL</span>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-lock"></i>
+                    <span>Dados Criptografados</span>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-user-shield"></i>
+                    <span>LGPD Compliant</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Clínica Saúde Total. Todos os direitos reservados.</p>
+                <p style="margin-top: 0.5rem;">CNPJ: 12.345.678/0001-90 | CRM-SP: 12345</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hide');
+            }, 1000);
+        });
+
+        // AOS Initialization
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        document.querySelector('.appointment-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Agendamento enviado com sucesso! Entraremos em contato em breve.');
+            e.target.reset();
+        });
+
+        // Smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu open/close
+        (function() {
+            var btn = document.getElementById('mobileMenuBtn');
+            var overlay = document.getElementById('mobileMenuOverlay');
+            var drawer = document.getElementById('mobileMenuDrawer');
+            var closeBtn = document.getElementById('mobileMenuClose');
+            function openMenu() {
+                overlay.classList.add('open');
+                drawer.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                drawer.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                overlay.classList.remove('open');
+                drawer.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+                drawer.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            if (btn) btn.addEventListener('click', openMenu);
+            if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+            if (overlay) overlay.addEventListener('click', closeMenu);
+            document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+        })();
+    </script>
+</body>
+</html>

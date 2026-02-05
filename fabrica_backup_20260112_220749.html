@@ -1,0 +1,4406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Criamos sites profissionais que convertem. Design moderno, tecnologia de ponta e resultados garantidos.">
+    <title>fabrica® Studio – Web Design, Branding & Digital Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: #000000;
+            --foreground: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: var(--foreground);
+            background: var(--background);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.5;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            z-index: 9999;
+            transform-origin: left;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .navbar.scrolled {
+            background: rgba(240, 240, 240, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-menu a:hover {
+            color: white;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #000;
+            cursor: pointer;
+        }
+        
+        .nav-menu sup {
+            font-size: 0.6em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        /* Sections */
+        section {
+            position: relative;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .hero-bg-1, .hero-bg-2 {
+            position: absolute;
+            width: 384px;
+            height: 384px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(96px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero-bg-1 {
+            top: 15%;
+            left: 15%;
+            animation-duration: 25s;
+        }
+
+        .hero-bg-2 {
+            bottom: 15%;
+            right: 15%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(150px, -80px) scale(1.3); 
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 0.3;
+            }
+            75% { 
+                transform: translate(-100px, 100px) scale(1.2); 
+                opacity: 0.4;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 12rem 0 8rem;
+            animation: fadeInUp 0.8s ease;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(4.5rem, 16vw, 12rem);
+            font-weight: 500;
+            color: white;
+            margin-bottom: 2rem;
+            margin-top: 0;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            text-transform: lowercase;
+        }
+
+        .hero .studio {
+            font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        .hero-services {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+
+        .hero-services-item {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 400;
+            animation: fadeInUp 0.6s ease;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .hero-services-item:hover {
+            color: rgba(255, 255, 255, 1);
+            transform: translateX(4px);
+        }
+        
+        .hero-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 2rem;
+            max-width: 600px;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        .hero-left {
+            text-align: left;
+        }
+        
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+        
+        .hero-profile-card {
+            background: white;
+            color: #000;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            max-width: 280px;
+            margin-top: auto;
+            text-align: left;
+        }
+        
+        .hero-profile-card img {
+            display: none;
+        }
+        
+        .hero-profile-card .profile-role {
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        .hero-profile-card .profile-name {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        .hero-profile-card button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        .hero-profile-card button:hover {
+            background: #333;
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            animation: fadeIn 0.8s ease 1.2s both;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-cta button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: underline;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-underline-offset: 4px;
+        }
+
+        .hero-cta button:hover {
+            color: white;
+            text-decoration-thickness: 2px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.98);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        /* Smooth scroll reveal animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pricing Hero Section */
+        .pricing-hero {
+            min-height: 85vh;
+            background: #000000;
+            position: relative;
+            overflow: hidden;
+            padding: 110px 0 120px;
+        }
+
+        .pricing-hero-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-kicker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .pricing-kicker-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pricing-kicker-text {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .pricing-headline {
+            font-size: clamp(4rem, 10vw, 6.875rem);
+            font-weight: 900;
+            line-height: 0.95;
+            color: #ffffff;
+            margin: 0 0 3rem 0;
+            letter-spacing: -0.04em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .pricing-toggle {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 100px;
+            padding: 4px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .pricing-toggle-btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-toggle-btn.active {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .pricing-toggle-btn:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            padding: 32px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .pricing-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .pricing-col-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pricing-col-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .pricing-col-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .pricing-upsell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .pricing-upsell-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .pricing-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .pricing-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .pricing-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: .3s;
+            border-radius: 100px;
+        }
+
+        .pricing-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        .pricing-switch input:checked + .pricing-slider {
+            background-color: #ffffff;
+        }
+
+        .pricing-switch input:checked + .pricing-slider:before {
+            transform: translateX(22px);
+            background-color: #000000;
+        }
+
+        .pricing-col-center {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .pricing-currency {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .pricing-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-left: 0.25rem;
+        }
+
+        .pricing-delivery {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pricing-delivery-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-delivery-value {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .pricing-col-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .pricing-feature-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            height: 52px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 100px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo Pricing */
+        @media (max-width: 1024px) {
+            .pricing-card-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .pricing-headline {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-hero {
+                padding: 80px 0 80px;
+                min-height: auto;
+            }
+
+            .pricing-headline {
+                font-size: 3.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .pricing-toggle {
+                margin-bottom: 2rem;
+            }
+
+            .pricing-glass-card {
+                padding: 24px;
+            }
+
+            .pricing-card-grid {
+                gap: 2rem;
+            }
+
+            .pricing-amount {
+                flex-wrap: wrap;
+            }
+
+            .pricing-value {
+                font-size: 2.75rem;
+            }
+        }
+
+        /* Services Editorial */
+        .services-editorial {
+            min-height: 90vh;
+            background: #000000;
+            padding: 80px 0 100px;
+            position: relative;
+        }
+
+        .services-editorial-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-kicker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .services-kicker-icon {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .services-kicker-text {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .services-headline-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .services-headline {
+            font-size: clamp(4rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 0.95;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.04em;
+        }
+
+        .services-count-badge {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+
+        .services-editorial-list {
+            margin-bottom: 0;
+        }
+
+        .service-editorial-item {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            transition: border-color 0.3s ease;
+        }
+
+        .service-editorial-item:last-child {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .service-editorial-closed {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.75rem 0;
+            cursor: pointer;
+            gap: 2rem;
+        }
+
+        .service-number {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            font-family: 'Inter', monospace;
+            min-width: 60px;
+        }
+
+        .service-title-closed {
+            flex: 1;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .service-editorial-closed:hover .service-title-closed {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .service-toggle-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .service-toggle-btn:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+        }
+
+        .service-editorial-item.active .service-toggle-btn {
+            transform: rotate(45deg);
+        }
+
+        .service-editorial-expanded {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+        }
+
+        .service-editorial-item.active .service-editorial-expanded {
+            max-height: 1000px;
+            opacity: 1;
+            padding-bottom: 2rem;
+        }
+
+        .service-expanded-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding: 0;
+        }
+
+        .service-thumbnail {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .service-content-center {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .service-title-expanded {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .service-description {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .service-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .service-category-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        .service-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-chip {
+            background: #ffffff;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .service-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .services-cta-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 100px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 3rem;
+        }
+
+        .services-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsivo Services Editorial */
+        @media (max-width: 1024px) {
+            .service-expanded-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0;
+            }
+
+            .service-thumbnail {
+                width: 100%;
+                height: 200px;
+            }
+
+            .services-headline {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-editorial {
+                padding: 80px 0 80px;
+                min-height: auto;
+            }
+
+            .services-headline {
+                font-size: 3.5rem;
+            }
+
+            .services-headline-wrapper {
+                margin-bottom: 3rem;
+            }
+
+            .service-editorial-closed {
+                padding: 1.25rem 0;
+            }
+
+            .service-number {
+                min-width: 45px;
+                font-size: 0.75rem;
+            }
+
+            .service-title-closed {
+                font-size: 1.125rem;
+            }
+
+            .service-toggle-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Services */
+        .services {
+            padding: 4rem 0;
+            background: #000000;
+        }
+        
+        .section-title {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .services-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .services-header .section-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        
+        .services-count {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.125rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 48rem;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .services-list {
+            margin-top: 0;
+        }
+
+        .service-accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .service-accordion-item:hover {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .service-accordion-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+        
+        .service-accordion-number {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            min-width: 50px;
+            font-family: 'Inter', monospace;
+        }
+        
+        .service-accordion-thumbnail {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-accordion-title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #fff;
+            flex: 1;
+            letter-spacing: -0.02em;
+        }
+        
+        .service-accordion-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: transform 0.3s ease;
+            font-weight: 300;
+        }
+        
+        .service-accordion-item.active .service-accordion-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .service-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, opacity 0.3s ease;
+            padding: 0 0 0 150px;
+            opacity: 0;
+        }
+        
+        .service-accordion-item.active .service-accordion-content {
+            max-height: 1000px;
+            padding: 1rem 0 0 150px;
+            opacity: 1;
+        }
+        
+            @media (max-width: 768px) {
+            .service-accordion-header {
+                gap: 0.75rem;
+            }
+            
+            .service-accordion-number {
+                min-width: 40px;
+                font-size: 0.75rem;
+            }
+            
+            .service-accordion-thumbnail {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+            
+            .service-accordion-title {
+                font-size: 1rem;
+            }
+            
+            .service-accordion-content {
+                padding: 0;
+            }
+            
+            .service-accordion-item.active .service-accordion-content {
+                padding: 1rem 0 0 0;
+            }
+        }
+        
+        .service-accordion-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-width: 600px;
+        }
+        
+        .service-accordion-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .service-category-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-category-tag:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 3rem;
+            margin-bottom: 10rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-item:hover {
+            transform: translateY(-4px);
+        }
+
+
+        .service-number {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        .service-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: -0.05em;
+            line-height: 1.1;
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1.375rem;
+            margin-bottom: 3rem;
+            max-width: 42rem;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+
+        .service-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .category-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* CTA Final Section */
+        .cta-final-section {
+            padding: 8rem 0;
+            background: #000000;
+            text-align: center;
+        }
+
+        .cta-final-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .cta-final-headline {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+        }
+
+        .cta-final-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.125rem;
+            line-height: 1.75;
+            margin-bottom: 3rem;
+        }
+
+        .cta-final-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-final-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-final-guarantee {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .cta-final-section {
+                padding: 5rem 0;
+            }
+
+            .cta-final-headline {
+                font-size: 2rem;
+            }
+
+            .cta-final-text {
+                font-size: 1rem;
+            }
+
+            .cta-final-btn {
+                width: 100%;
+            }
+        }
+
+        /* Projects */
+        .projects {
+            padding: 8rem 0;
+            background: #000000;
+        }
+        
+        .projects-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            grid-template-rows: auto auto;
+            gap: 1rem 3rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+        
+        .projects-count {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            grid-row: 1;
+            grid-column: 1;
+        }
+        
+        .projects-title-main {
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            grid-row: 1 / 3;
+            grid-column: 2;
+            text-align: center;
+        }
+        
+        .projects-copyright {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            grid-row: 2;
+            grid-column: 2;
+            text-align: center;
+            margin-top: -1rem;
+        }
+        
+        .projects-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            max-width: 400px;
+            grid-row: 1;
+            grid-column: 3;
+            font-weight: 400;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .projects-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .projects-count {
+                grid-row: 1;
+                grid-column: 1;
+            }
+            
+            .projects-title-main {
+                grid-row: 2;
+                grid-column: 1;
+            }
+            
+            .projects-copyright {
+                grid-row: 3;
+                grid-column: 1;
+            }
+            
+            .projects-description {
+                grid-row: 4;
+                grid-column: 1;
+                max-width: 100%;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-card-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .project-card-title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #fff;
+            margin: 0;
+        }
+        
+        .project-card-year {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-left: 0.5rem;
+        }
+        
+        .project-card-menu {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        
+        .project-card-menu span {
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            display: block;
+        }
+
+        .project-image {
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-logo-overlay {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .project-logo-overlay.center {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .project-logo-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .project-logo-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-name {
+            font-size: 1.75rem;
+            font-weight: 300;
+            transition: color 0.3s;
+            letter-spacing: -0.03em;
+            line-height: 1.3;
+        }
+
+        .project-card:hover .project-name {
+            color: white;
+        }
+
+        .project-year {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        /* Why Choose */
+        .why-choose {
+            padding: 8rem 0;
+            text-align: center;
+            background: #000000;
+        }
+
+        .why-choose-content {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .why-choose h2 {
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: -0.05em;
+            line-height: 1.05;
+            color: #ffffff;
+        }
+
+        .why-choose h3 {
+            font-size: clamp(2.25rem, 6.5vw, 4.5rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 3rem;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+        }
+
+        .why-choose p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 3.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+            padding: 1.25rem 2.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* About */
+        .about {
+            padding: 3rem 0;
+            background: #000000;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .about-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        .about-image {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-number {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        .about-title {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.04em;
+            line-height: 1.25;
+            color: #ffffff;
+        }
+
+        .about-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 12rem 0;
+            background: #000000;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.125rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: white;
+        }
+
+        .testimonial-company {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+        }
+
+        .testimonials-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 3rem;
+            margin-top: 6rem;
+        }
+
+        .testimonial-stat {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial-stat.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-stat-value {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 8rem 0;
+        }
+
+        .pricing-card {
+            max-width: 42rem;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .pricing-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pricing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-left h3 {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-left .price {
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        .pricing-left .period {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+        }
+
+        .pricing-right h3 {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-right .price {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .pricing-features {
+            margin: 3rem 0;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-feature svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-note {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 12rem 0;
+            background: #000000;
+        }
+        
+        .faq .section-title {
+            color: #ffffff;
+        }
+        
+        .faq .section-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .faq-container {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .faq-container .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 300;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding-bottom: 2rem;
+        }
+
+        .faq-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Team */
+        .team {
+            padding: 8rem 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .team-member {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .team-member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-image {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-role {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 12rem 0;
+        }
+
+        .contact-container {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .contact-container .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 150px;
+        }
+
+        .form-note {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+
+        select.form-input {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(255,255,255,0.6)' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 3rem;
+        }
+
+        select.form-input option {
+            background: #000;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 6rem 0 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: #000000;
+        }
+        
+        .footer-brand {
+            color: #ffffff;
+        }
+        
+        .footer-title {
+            color: #ffffff;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-links li {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-title {
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .service-item {
+                grid-template-columns: 1fr;
+                margin-bottom: 6rem;
+            }
+
+            .hero-services {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .section-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+
+            .hero h1 {
+                font-size: clamp(3.5rem, 18vw, 8rem);
+            }
+
+            .hero h2 {
+                font-size: clamp(1.75rem, 7vw, 3rem);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            @media (max-width: 768px) {
+                .about-grid {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Approach Editorial Section */
+        .approach-editorial {
+            width: 100%;
+            background: #000000;
+            position: relative;
+        }
+
+        .approach-editorial-divider {
+            width: 100%;
+            height: 1px;
+            background: #2a2a2a;
+        }
+
+        .approach-editorial-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 4rem;
+        }
+
+        .approach-editorial-grid {
+            display: grid;
+            grid-template-columns: 3fr 9fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .approach-editorial-left {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .approach-editorial-left.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .approach-editorial-logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .approach-editorial-subtitle {
+            font-size: 0.875rem;
+            color: #999999;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .approach-editorial-right {
+            max-width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .approach-editorial-right.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s;
+        }
+
+        .approach-editorial-headline {
+            font-size: 2.75rem;
+            font-weight: 500;
+            color: #999999;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin: 0;
+            max-width: 50rem;
+        }
+
+        .approach-editorial-highlight {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .approach-editorial-text {
+            font-size: 1rem;
+            color: #999999;
+            line-height: 1.65;
+            margin: 1.75rem 0 0 0;
+            max-width: 33.75rem;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            width: 100%;
+            background: #000000;
+            padding: 6.875rem 0;
+        }
+
+        .why-choose-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .why-choose-kicker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .why-choose-kicker.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .why-choose-dot {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .why-choose-kicker-text {
+            font-size: 0.875rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .why-choose-headline {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin: 0 0 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .why-choose-headline.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+        }
+
+        .why-choose-headline-primary {
+            color: #ffffff;
+        }
+
+        .why-choose-headline-secondary {
+            color: #999999;
+        }
+
+        .why-choose-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .why-choose-image-wrapper {
+            margin-top: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .why-choose-image-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+        }
+
+        .why-choose-image {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+
+        .why-choose-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .why-choose-description {
+            font-size: 0.875rem;
+            color: #999999;
+            line-height: 1.75;
+            max-width: 460px;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .why-choose-description.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+        }
+
+        .why-choose-description strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .why-choose-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .why-choose-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .why-choose-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s, 
+                        box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .why-choose-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .why-choose-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2.5rem;
+        }
+
+        .why-choose-card-number {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.04em;
+        }
+
+        .why-choose-card-badge {
+            font-size: 0.75rem;
+            color: #4a4a4a;
+            font-weight: 500;
+        }
+
+        .why-choose-card-title {
+            font-size: 0.8125rem;
+            color: #ffffff;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 0 0 1rem 0;
+            text-align: center;
+        }
+
+        .why-choose-card-footer {
+            font-size: 0.8125rem;
+            color: #666666;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .why-choose-card-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .why-choose-logo {
+            font-size: 0.7rem;
+            color: #666666;
+            opacity: 0.45;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Fabrica Case Study Section */
+        .fabrica-section {
+            width: 100%;
+            background: #000000;
+            padding: 4rem 0;
+        }
+
+        .fabrica-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .fabrica-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            height: 540px;
+        }
+
+        /* Card Base Styles */
+        .fabrica-card-large,
+        .fabrica-card-metrics,
+        .fabrica-card-pagespeed,
+        .fabrica-card-visits {
+            border-radius: 28px;
+            border: 1px solid #2a2a2a;
+            background: #111111;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fabrica-card-large.visible,
+        .fabrica-card-metrics.visible,
+        .fabrica-card-pagespeed.visible,
+        .fabrica-card-visits.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        all 0.2s ease;
+        }
+
+        .fabrica-card-large:hover,
+        .fabrica-card-metrics:hover,
+        .fabrica-card-pagespeed:hover,
+        .fabrica-card-visits:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 0 rgba(255,255,255,0.05), 0 12px 32px rgba(0,0,0,0.6);
+        }
+
+        /* Card Esquerdo - Case Study */
+        .fabrica-card-large {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 60%, #1a1a1a 100%);
+            height: 540px;
+            border-color: #2a2a2a;
+        }
+
+        .fabrica-card-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.4) 55%, rgba(17,17,17,0) 70%);
+        }
+
+        .fabrica-card-image {
+            position: absolute;
+            right: -40px;
+            top: 0;
+            height: 100%;
+            width: 60%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .fabrica-card-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fabrica-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .fabrica-card-label {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .fabrica-card-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            max-width: 260px;
+            line-height: 1.6;
+        }
+
+        .fabrica-card-toggle {
+            color: #ffffff;
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .fabrica-card-toggle:hover {
+            transform: rotate(90deg);
+        }
+
+        .fabrica-logo-large {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 86px;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+
+        .fabrica-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .fabrica-card-status {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .fabrica-card-status:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .fabrica-arrow {
+            display: inline-block;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        .fabrica-card-status:hover .fabrica-arrow {
+            transform: translate(2px, -2px);
+        }
+
+        .fabrica-card-tagline {
+            text-align: right;
+            max-width: 240px;
+        }
+
+        .fabrica-card-tagline p {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        /* Card Meio - Métricas */
+        .fabrica-card-metrics {
+            height: 540px;
+            padding: 28px;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 70% 15%, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 90px),
+                radial-gradient(circle at 70% 15%, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 140px),
+                radial-gradient(circle at 70% 15%, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 200px),
+                #111111;
+        }
+
+        .fabrica-metrics-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .fabrica-label {
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 12px;
+        }
+
+        .fabrica-headline {
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 40px;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            max-width: 320px;
+        }
+
+        .fabrica-conversion {
+            font-weight: 600;
+            font-size: 26px;
+            color: #ffffff;
+            margin-top: 8px;
+        }
+
+        .fabrica-testimonial {
+            margin-top: auto;
+        }
+
+        .fabrica-stars {
+            color: #F59E0B;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .fabrica-quote {
+            font-size: 13px;
+            color: #cccccc;
+            line-height: 1.6;
+            max-width: 320px;
+            margin-bottom: 12px;
+        }
+
+        .fabrica-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fabrica-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ddd, #aaa);
+            background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .fabrica-author span {
+            font-size: 12px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Coluna Direita */
+        .fabrica-right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 540px;
+        }
+
+        /* Card PageSpeed */
+        .fabrica-card-pagespeed {
+            height: 260px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .fabrica-score-ring {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 14px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .fabrica-card-pagespeed:hover .fabrica-score-ring {
+            transform: scale(1.05);
+        }
+
+        .fabrica-score-ring span {
+            font-weight: 600;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        .fabrica-card-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .fabrica-card-text {
+            color: #999999;
+            font-size: 12px;
+            line-height: 1.6;
+            max-width: 240px;
+        }
+
+        /* Card Visitas */
+        .fabrica-card-visits {
+            height: 264px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fabrica-visits-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .fabrica-visits-number {
+            font-weight: 800;
+            font-size: 34px;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .fabrica-visits-badge {
+            background: #2a2a2a;
+            color: #cccccc;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 50px;
+        }
+
+        .fabrica-visits-label {
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 16px;
+        }
+
+        /* Gráfico */
+        .fabrica-chart {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            padding-bottom: 8px;
+            height: 120px;
+        }
+
+        .fabrica-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            height: 100%;
+        }
+
+        .fabrica-bar-pill {
+            font-size: 10px;
+            color: #cccccc;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            padding: 2px 6px;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+
+        .fabrica-bar-visual {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .fabrica-bar-fill {
+            width: 100%;
+            background: #2a2a2a;
+            border-radius: 12px;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fabrica-bar-fill.fabrica-bar-active {
+            background: #ffffff;
+        }
+
+        .fabrica-bar-month {
+            font-size: 9px;
+            color: #666666;
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+            .approach-editorial-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .approach-editorial-headline {
+                font-size: 2.25rem;
+            }
+
+            .approach-editorial-container {
+                padding: 3rem 1.5rem 3rem;
+            }
+
+            .why-choose-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .why-choose-image-wrapper {
+                margin-top: 0;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .why-choose-headline {
+                font-size: 2.75rem;
+            }
+
+            .fabrica-intro-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .fabrica-intro-headline {
+                font-size: 2.5rem;
+            }
+
+            .fabrica-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .fabrica-card-large {
+                height: 500px;
+            }
+
+            .fabrica-card-metrics {
+                height: auto;
+                min-height: 400px;
+            }
+
+            .fabrica-right-column {
+                height: auto;
+            }
+
+            .fabrica-logo-large {
+                font-size: 64px;
+            }
+
+            .fabrica-headline {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .approach-editorial-container {
+                padding: 2.5rem 1.5rem 2.5rem;
+            }
+
+            .approach-editorial-grid {
+                gap: 2rem;
+            }
+
+            .approach-editorial-headline {
+                font-size: 1.875rem;
+            }
+
+            .approach-editorial-text {
+                font-size: 0.9375rem;
+            }
+
+            .why-choose-section {
+                padding: 4rem 0;
+            }
+
+            .why-choose-headline {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .why-choose-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .why-choose-image {
+                height: 360px;
+            }
+
+            .fabrica-section {
+                padding: 2rem 0;
+            }
+
+            .fabrica-card-large {
+                height: 450px;
+                padding: 20px;
+            }
+
+            .fabrica-logo-large {
+                font-size: 48px;
+            }
+
+            .fabrica-headline {
+                font-size: 28px;
+            }
+
+            .fabrica-card-tagline {
+                max-width: 180px;
+            }
+
+            .fabrica-card-tagline p {
+                font-size: 14px;
+            }
+
+            .fabrica-chart {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">fabrica®</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#studio">Studio</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-bg-1"></div>
+        <div class="hero-bg-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <p class="studio">Studio</p>
+                    <h1>fabrica®</h1>
+                    <p class="hero-description">Nada de sites genéricos. Nada de promessas vazias de marketing. Apenas ferramentas e estratégias que ajudam seu negócio a crescer e sua marca a brilhar.</p>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-services">
+                        <div class="hero-services-item">Marca e Identidade</div>
+                        <div class="hero-services-item">Marketing de mídia social</div>
+                        <div class="hero-services-item">Design e desenvolvimento web</div>
+                        <div class="hero-services-item">Otimização de SEO</div>
+                    </div>
+                    <div class="hero-profile-card">
+                        <div class="profile-role">Líder de Equipe na fabrica®</div>
+                        <div class="profile-name">Lauren Thompson</div>
+                        <button onclick="document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})">Vamos conversar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="studio" class="services-editorial">
+        <div class="services-editorial-container">
+            <!-- Kicker -->
+            <div class="services-kicker">
+                <span class="services-kicker-icon">◉</span>
+                <span class="services-kicker-text">O que fazemos</span>
+            </div>
+
+            <!-- Headline -->
+            <div class="services-headline-wrapper">
+                <h2 class="services-headline">Serviços.</h2>
+            </div>
+
+            <!-- Services List -->
+            <div class="services-editorial-list">
+                <!-- Service 001 -->
+                <div class="service-editorial-item">
+                    <div class="service-editorial-closed" onclick="toggleServiceEditorial(this)">
+                        <h3 class="service-title-closed">Design e desenvolvimento web</h3>
+                        <button class="service-toggle-btn">+</button>
+                    </div>
+                    <div class="service-editorial-expanded">
+                        <div class="service-expanded-grid">
+                            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=120&h=120&fit=crop" 
+                                 alt="Service" 
+                                 class="service-thumbnail">
+                            <div class="service-content-center">
+                                <h3 class="service-title-expanded">Design e desenvolvimento web</h3>
+                                <p class="service-description">Sites modernos, responsivos e fáceis de usar, projetados para envolver os visitantes e gerar conversões.</p>
+                            </div>
+                            <div class="service-categories">
+                                <span class="service-category-label">Categorias</span>
+                                <div class="service-chips">
+                                    <span class="service-chip">Design de embalagem</span>
+                                    <span class="service-chip">Design de logotipo</span>
+                                    <span class="service-chip">Reformulação da marca</span>
+                                    <span class="service-chip">Tipografia</span>
+                                    <span class="service-chip">Diretrizes</span>
+                                    <span class="service-chip">6+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 002 -->
+                <div class="service-editorial-item">
+                    <div class="service-editorial-closed" onclick="toggleServiceEditorial(this)">
+                        <h3 class="service-title-closed">Marketing de mídia social</h3>
+                        <button class="service-toggle-btn">+</button>
+                    </div>
+                    <div class="service-editorial-expanded">
+                        <div class="service-expanded-grid">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=120&h=120&fit=crop" 
+                                 alt="Service" 
+                                 class="service-thumbnail">
+                            <div class="service-content-center">
+                                <h3 class="service-title-expanded">Marketing de mídia social</h3>
+                                <p class="service-description">Campanhas estratégicas de mídia social, baseadas em dados, projetadas para aumentar o reconhecimento da marca e conectar-se com seu público-alvo.</p>
+                            </div>
+                            <div class="service-categories">
+                                <span class="service-category-label">Categorias</span>
+                                <div class="service-chips">
+                                    <span class="service-chip">Estratégias de conteúdo</span>
+                                    <span class="service-chip">Gestão comunitária</span>
+                                    <span class="service-chip">Anúncios pagos</span>
+                                    <span class="service-chip">Direção de plataforma</span>
+                                    <span class="service-chip">6+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 003 -->
+                <div class="service-editorial-item">
+                    <div class="service-editorial-closed" onclick="toggleServiceEditorial(this)">
+                        <h3 class="service-title-closed">SEO e marketing de conteúdo</h3>
+                        <button class="service-toggle-btn">+</button>
+                    </div>
+                    <div class="service-editorial-expanded">
+                        <div class="service-expanded-grid">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=120&h=120&fit=crop" 
+                                 alt="Service" 
+                                 class="service-thumbnail">
+                            <div class="service-content-center">
+                                <h3 class="service-title-expanded">SEO e marketing de conteúdo</h3>
+                                <p class="service-description">Otimização para mecanismos de busca e criação de conteúdo relevante para aumentar sua visibilidade online.</p>
+                            </div>
+                            <div class="service-categories">
+                                <span class="service-category-label">Categorias</span>
+                                <div class="service-chips">
+                                    <span class="service-chip">Otimização SEO</span>
+                                    <span class="service-chip">Blog e artigos</span>
+                                    <span class="service-chip">Link building</span>
+                                    <span class="service-chip">Palavras-chave</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 004 -->
+                <div class="service-editorial-item">
+                    <div class="service-editorial-closed" onclick="toggleServiceEditorial(this)">
+                        <h3 class="service-title-closed">Marca e identidade</h3>
+                        <button class="service-toggle-btn">+</button>
+                    </div>
+                    <div class="service-editorial-expanded">
+                        <div class="service-expanded-grid">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=120&h=120&fit=crop" 
+                                 alt="Service" 
+                                 class="service-thumbnail">
+                            <div class="service-content-center">
+                                <h3 class="service-title-expanded">Marca e identidade</h3>
+                                <p class="service-description">Desenvolvimento de identidade visual completa que representa sua marca de forma única e memorável.</p>
+                            </div>
+                            <div class="service-categories">
+                                <span class="service-category-label">Categorias</span>
+                                <div class="service-chips">
+                                    <span class="service-chip">Criação de logo</span>
+                                    <span class="service-chip">Manual de marca</span>
+                                    <span class="service-chip">Identidade corporativa</span>
+                                    <span class="service-chip">Branding estratégico</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="projects-header">
+                <div>
+                    <h2 class="projects-title-main">Projetos.</h2>
+                </div>
+                <p class="projects-description">Ajudamos empresas de diversos setores a atingirem seus objetivos. Aqui estão alguns de nossos projetos recentes.</p>
+            </div>
+            <div class="projects-grid">
+                <a href="demo-restaurante.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Restaurante Gourmet.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop" alt="Restaurante Gourmet">
+                    </div>
+                </a>
+
+                <a href="demo-ecommerce.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Loja Virtual Fashion.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop" alt="Loja Virtual">
+                    </div>
+                </a>
+
+                <a href="demo-landing.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Landing Page Conversão.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Landing Page">
+                    </div>
+                </a>
+
+                <a href="demo-clinica.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Clínica Médica.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=600&fit=crop" alt="Clínica Médica">
+                    </div>
+                </a>
+
+                <a href="demo-portfolio.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Portfólio Criativo.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&h=600&fit=crop" alt="Portfólio">
+                    </div>
+                </a>
+
+                <a href="demo-imobiliaria.html" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                    <div class="project-card-header">
+                        <h3 class="project-card-title">Imobiliária Premium.<span class="project-card-year">/2025</span></h3>
+                        <div class="project-card-menu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop" alt="Imobiliária">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Process -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Como Trabalhamos</h2>
+            <p class="section-subtitle">Processo simples e eficiente</p>
+            <div class="about-grid">
+                <div class="about-item">
+                    <div class="about-image" style="display: flex; align-items: center; justify-content: center; font-size: 1.75rem; color: rgba(255, 255, 255, 0.3);">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="about-number">01</div>
+                    <h3 class="about-title">Briefing</h3>
+                    <p class="about-description">Entendemos suas necessidades e objetivos</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-image" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(255, 255, 255, 0.3);">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <div class="about-number">02</div>
+                    <h3 class="about-title">Design</h3>
+                    <p class="about-description">Criamos layouts exclusivos e modernos</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-image" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(255, 255, 255, 0.3);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="about-number">03</div>
+                    <h3 class="about-title">Desenvolvimento</h3>
+                    <p class="about-description">Codificamos com as melhores tecnologias</p>
+                </div>
+                <div class="about-item">
+                    <div class="about-image" style="display: flex; align-items: center; justify-content: center; font-size: 1.75rem; color: rgba(255, 255, 255, 0.3);">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="about-number">04</div>
+                    <h3 class="about-title">Lançamento</h3>
+                    <p class="about-description">Seu site no ar pronto para vender</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose-section">
+        <div class="why-choose-container">
+            <!-- Kicker -->
+            <div class="why-choose-kicker">
+                <span class="why-choose-dot"></span>
+                <span class="why-choose-kicker-text">Por que nos escolher?</span>
+            </div>
+
+            <!-- Headline -->
+            <h2 class="why-choose-headline">
+                <span class="why-choose-headline-primary">Resultados comprovados em</span><br>
+                <span class="why-choose-headline-primary">todos os projetos,</span><br>
+                <span class="why-choose-headline-secondary">com foco em</span><br>
+                <span class="why-choose-headline-secondary">design e funcionalidade.</span>
+            </h2>
+
+            <!-- Content Grid -->
+            <div class="why-choose-content">
+                <!-- Imagem -->
+                <div class="why-choose-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=840&fit=crop" 
+                         alt="Team member" 
+                         class="why-choose-image">
+                </div>
+
+                <!-- Lado direito -->
+                <div class="why-choose-right">
+                    <!-- Texto descritivo -->
+                    <p class="why-choose-description">
+                        <strong>Sem rodeios, apenas resultados.</strong> Design inteligente e ferramentas que facilitam seu trabalho. Nosso foco é em design inteligente e funcionalidades úteis, projeto após projeto.
+                    </p>
+
+                    <!-- Cards Grid -->
+                    <div class="why-choose-cards">
+                        <!-- Card 1 -->
+                        <div class="why-choose-card">
+                            <div class="why-choose-card-header">
+                                <span class="why-choose-card-number">49+</span>
+                                <span class="why-choose-card-badge">01</span>
+                            </div>
+                            <p class="why-choose-card-title">Projetos concluídos com sucesso</p>
+                            <p class="why-choose-card-footer">Já entregamos mais de 50 projetos que ajudam empresas a gerar resultados reais.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="why-choose-card">
+                            <div class="why-choose-card-header">
+                                <span class="why-choose-card-number">90%</span>
+                                <span class="why-choose-card-badge">02</span>
+                            </div>
+                            <p class="why-choose-card-title">Taxa de satisfação do cliente</p>
+                            <div class="why-choose-card-logos">
+                                <div class="why-choose-logo">Logoipsum</div>
+                                <div class="why-choose-logo">Logoipsum</div>
+                                <div class="why-choose-logo">Logoipsum</div>
+                                <div class="why-choose-logo">Logoipsum</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Editorial Section -->
+    <section class="approach-editorial">
+        <div class="approach-editorial-divider"></div>
+        <div class="approach-editorial-container">
+            <div class="approach-editorial-grid">
+                <!-- Coluna Esquerda -->
+                <div class="approach-editorial-left">
+                    <h3 class="approach-editorial-logo">fabrica®</h3>
+                    <p class="approach-editorial-subtitle">Cada projeto que assumimos é concebido para o sucesso a longo prazo.</p>
+                </div>
+
+                <!-- Coluna Direita -->
+                <div class="approach-editorial-right">
+                    <h2 class="approach-editorial-headline">
+                        Nosso abordagem é simples: <span class="approach-editorial-highlight">nós foco sobre funcionalidade, velocidade, e clareza,</span> garantindo que todo projeto serve um <span class="approach-editorial-highlight">claro propósito</span> sem desnecessário complexidade.
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fabrica Case Study Section -->
+    <section class="fabrica-section">
+        <div class="fabrica-container">
+            <div class="fabrica-grid">
+                
+                <!-- Card Esquerdo - Case Study -->
+                <div class="fabrica-card-large">
+                    <div class="fabrica-card-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=800&fit=crop" alt="Case Study" class="fabrica-card-image">
+                    
+                    <div class="fabrica-card-content">
+                        <div class="fabrica-card-header">
+                            <div>
+                                <h3 class="fabrica-card-label">Estudo de caso</h3>
+                                <p class="fabrica-card-description">Redesign da experiência do usuário (UX/UI), otimização do front-end.</p>
+                            </div>
+                            <button class="fabrica-card-toggle">+</button>
+                        </div>
+                        
+                        <div class="fabrica-card-center">
+                            <h1 class="fabrica-logo-large">fabrica®</h1>
+                        </div>
+                        
+                        <div class="fabrica-card-footer">
+                            <div class="fabrica-card-status">
+                                Site em funcionamento
+                                <span class="fabrica-arrow">↗</span>
+                            </div>
+                            <div class="fabrica-card-tagline">
+                                <p>Desde a criação de marcas até o desenvolvimento web e o marketing.</p>
+                                <p>Fazemos tudo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Meio - Métricas -->
+                <div class="fabrica-card-metrics">
+                    <div class="fabrica-metrics-content">
+                        <div>
+                            <p class="fabrica-label">Aumento de desempenho:</p>
+                            <h2 class="fabrica-headline">Velocidade da página +48%, Taxa de rejeição -23%</h2>
+                            
+                            <p class="fabrica-label" style="margin-top: 1.5rem;">Melhoria da taxa de conversão:</p>
+                            <p class="fabrica-conversion">4,2% → 5,9%</p>
+                        </div>
+                        
+                        <div class="fabrica-testimonial">
+                            <div class="fabrica-stars">★★★★★</div>
+                            <p class="fabrica-quote">"Graças à reformulação, temos observado um aumento constante de 60% nos leads."</p>
+                            <div class="fabrica-author">
+                                <div class="fabrica-avatar"></div>
+                                <span>Angela Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita -->
+                <div class="fabrica-right-column">
+                    <!-- Card PageSpeed -->
+                    <div class="fabrica-card-pagespeed">
+                        <div class="fabrica-score-ring">
+                            <span>100</span>
+                        </div>
+                        <h3 class="fabrica-card-title">Pontuação do PageSpeed</h3>
+                        <p class="fabrica-card-text">Priorizamos o desempenho sem sacrificar o apelo visual ou a funcionalidade.</p>
+                    </div>
+
+                    <!-- Card Visitas -->
+                    <div class="fabrica-card-visits">
+                        <div class="fabrica-visits-header">
+                            <span class="fabrica-visits-number">38K</span>
+                            <span class="fabrica-visits-badge">+30%</span>
+                        </div>
+                        <p class="fabrica-visits-label">Visitas trimestrais</p>
+                        
+                        <div class="fabrica-chart">
+                            <div class="fabrica-bar">
+                                <div class="fabrica-bar-pill">+1k</div>
+                                <div class="fabrica-bar-visual">
+                                    <div class="fabrica-bar-fill" style="height: 30%;"></div>
+                                </div>
+                                <span class="fabrica-bar-month">Dezembro</span>
+                            </div>
+                            <div class="fabrica-bar">
+                                <div class="fabrica-bar-pill">+1,3 mil</div>
+                                <div class="fabrica-bar-visual">
+                                    <div class="fabrica-bar-fill" style="height: 45%;"></div>
+                                </div>
+                                <span class="fabrica-bar-month">Janeiro</span>
+                            </div>
+                            <div class="fabrica-bar">
+                                <div class="fabrica-bar-pill">+1,1 mil</div>
+                                <div class="fabrica-bar-visual">
+                                    <div class="fabrica-bar-fill" style="height: 52%;"></div>
+                                </div>
+                                <span class="fabrica-bar-month">Fevereiro</span>
+                            </div>
+                            <div class="fabrica-bar">
+                                <div class="fabrica-bar-pill">+1,5 mil</div>
+                                <div class="fabrica-bar-visual">
+                                    <div class="fabrica-bar-fill" style="height: 68%;"></div>
+                                </div>
+                                <span class="fabrica-bar-month">Março</span>
+                            </div>
+                            <div class="fabrica-bar">
+                                <div class="fabrica-bar-pill">+6,3 mil</div>
+                                <div class="fabrica-bar-visual">
+                                    <div class="fabrica-bar-fill fabrica-bar-active" style="height: 100%;"></div>
+                                </div>
+                                <span class="fabrica-bar-month">Maio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Hero Section -->
+    <section class="pricing-hero">
+        <div class="pricing-hero-container">
+            <!-- Kicker -->
+            <div class="pricing-kicker">
+                <span class="pricing-kicker-icon">+</span>
+                <span class="pricing-kicker-text">Preços simples</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="pricing-headline">Preços.</h1>
+
+            <!-- Toggle Pills -->
+            <div class="pricing-toggle">
+                <button class="pricing-toggle-btn active">Por projeto</button>
+                <button class="pricing-toggle-btn">Mensal</button>
+            </div>
+
+            <!-- Glass Card -->
+            <div class="pricing-glass-card">
+                <div class="pricing-card-grid">
+                    <!-- Coluna Esquerda -->
+                    <div class="pricing-col-left">
+                        <h3 class="pricing-col-title">Quer mais tráfego e leads?</h3>
+                        <p class="pricing-col-text">Obtenha marketing e SEO que comecem com seus objetivos.</p>
+                        
+                        <div class="pricing-upsell">
+                            <span class="pricing-upsell-label">+$1.490</span>
+                            <label class="pricing-switch">
+                                <input type="checkbox">
+                                <span class="pricing-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Central -->
+                    <div class="pricing-col-center">
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">$</span>
+                            <span class="pricing-value">2.490</span>
+                            <span class="pricing-period">/projeto</span>
+                        </div>
+                        
+                        <div class="pricing-delivery">
+                            <span class="pricing-delivery-label">Prazo de entrega</span>
+                            <span class="pricing-delivery-value">3–4 semanas</span>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita -->
+                    <div class="pricing-col-right">
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">
+                                <span class="pricing-feature-icon">+</span>
+                                <span>Página inicial + até 4 páginas internas</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <span class="pricing-feature-icon">+</span>
+                                <span>Design e Desenvolvimento</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <span class="pricing-feature-icon">+</span>
+                                <span>Design otimizado para dispositivos móveis</span>
+                            </li>
+                        </ul>
+                        
+                        <button class="pricing-cta">Entre em contato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section style="width: 100%; background: #000;">
+        <div style="max-width: 1240px; margin: 0 auto; padding: 110px 24px;">
+
+            <!-- Header -->
+            <div style="margin-bottom: 60px;">
+                <h2 style="font-size: 88px; font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; color: #fff; margin: 0;">Experiências.</h2>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 8px;">©2025</p>
+            </div>
+
+            <!-- Grid de Cards -->
+            <div class="experiences-grid">
+                
+                <!-- CARD 1 - Rating 4,9 -->
+                <div style="background: #000; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px; min-height: 360px; display: flex; flex-direction: column;">
+                    <div style="display: flex; align-items: flex-end; gap: 8px;">
+                        <div style="font-size: 56px; font-weight: 800; line-height: 1; color: #fff;">4,9</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.5); padding-bottom: 8px;">/5</div>
+                    </div>
+
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 12px 0 0 0; max-width: 240px;">
+                        Já entregamos <span style="font-weight: 600; color: rgba(255,255,255,0.85);">mais de 56 projetos</span> que ajudam empresas a gerar resultados reais.
+                    </p>
+
+                    <div style="margin-top: auto; padding-top: 24px;">
+                        <div style="font-size: 12px; font-weight: 600; margin-bottom: 12px; color: #fff;">fabrica®</div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="display: flex; margin-left: -8px;">
+                                <img src="https://i.pravatar.cc/150?img=1" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #000; object-fit: cover;" />
+                                <img src="https://i.pravatar.cc/150?img=2" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #000; margin-left: -8px; object-fit: cover;" />
+                                <img src="https://i.pravatar.cc/150?img=3" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #000; margin-left: -8px; object-fit: cover;" />
+                                <img src="https://i.pravatar.cc/150?img=4" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #000; margin-left: -8px; object-fit: cover;" />
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid #000; margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #000;">56+</div>
+                            </div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.5);">
+                                <span style="color: #f97316;">★★★★★</span> Confiável por clientes em todo o
+                            </div>
+                        </div>
+                    </div>
+
+                    <button style="margin-top: 16px; width: 100%; background: #fff; color: #000; font-size: 12px; font-weight: 600; padding: 12px 20px; border-radius: 9999px; border: none; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.9)'" onmouseout="this.style.background='#fff'">
+                        Deixe uma avaliação
+                    </button>
+                </div>
+
+                <!-- CARD 2 - James Carter Review -->
+                <div style="background: #000; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px; min-height: 360px; display: flex; flex-direction: column;">
+                    <!-- HEADER (altura fixa) -->
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <img src="https://i.pravatar.cc/150?img=12" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; color: #fff; line-height: 1;">James Carter</div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1; margin-top: 4px;">Wilson & Co</div>
+                            </div>
+                        </div>
+                        <span style="color: rgba(255,255,255,0.3);">+</span>
+                    </div>
+
+                    <!-- DIVISÓRIA (OBRIGATÓRIA) -->
+                    <div style="height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
+
+                    <!-- ESTRELAS (posição fixa) -->
+                    <div style="color: #f97316; font-size: 12px;">★★★★★</div>
+
+                    <!-- TEXTO (cresce aqui) -->
+                    <p style="font-size: 14px; line-height: 1.6; margin: 16px 0 0 0; color: rgba(255,255,255,0.8);">
+                        Equipe incrível! Entregaram exatamente o que precisávamos, dentro do prazo e superando as expectativas.
+                    </p>
+                </div>
+
+                <!-- CARD 3 - Emily Davis Review -->
+                <div style="background: #000; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px; min-height: 360px; display: flex; flex-direction: column;">
+                    
+                    <p style="font-size: 18px; line-height: 1.3; font-weight: 500; margin: 0; color: #fff;">
+                        Um processo tranquilo do início ao fim. Equipe altamente profissional!
+                    </p>
+
+                    <!-- empurra conteúdo de baixo -->
+                    <div style="margin-top: auto;">
+                        <div style="height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="color: #f97316; font-size: 12px;">★★★★★</div>
+                            <span style="color: rgba(255,255,255,0.3);">+</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 12px; margin-top: 16px;">
+                            <img src="https://i.pravatar.cc/150?img=47" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; color: #fff;">Emily Davis</div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.5);">Hub de startups</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 4 - Ana Martinez Review -->
+                <div style="background: #000; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 24px; min-height: 360px; display: flex; flex-direction: column;">
+                    <!-- HEADER (altura fixa) -->
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <img src="https://i.pravatar.cc/150?img=32" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
+                            <div>
+                                <div style="font-size: 13px; font-weight: 600; color: #fff; line-height: 1;">Ana Martinez</div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1; margin-top: 4px;">Diretor de Marketing</div>
+                            </div>
+                        </div>
+                        <span style="color: rgba(255,255,255,0.3);">+</span>
+                    </div>
+
+                    <!-- DIVISÓRIA (OBRIGATÓRIA) -->
+                    <div style="height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
+
+                    <!-- ESTRELAS (posição fixa) -->
+                    <div style="color: #f97316; font-size: 12px;">★★★★★</div>
+
+                    <!-- TEXTO (cresce aqui) -->
+                    <p style="font-size: 14px; line-height: 1.6; margin: 16px 0 0 0; color: rgba(255,255,255,0.8);">
+                        Nossa nova identidade visual é exatamente o que imaginávamos: limpa, moderna e única. Número 1 em nosso setor.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Linha divisória -->
+            <div style="height: 1px; width: 100%; background: rgba(255,255,255,0.1); margin-top: 80px;"></div>
+        </div>
+    </section>
+
+    <style>
+        /* Experiences Grid - Desktop 4 colunas fixas */
+        .experiences-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+        
+        /* Tablet - 2 colunas */
+        @media (max-width: 1024px) {
+            .experiences-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Mobile - 1 coluna */
+        @media (max-width: 640px) {
+            .experiences-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Contact Section - Pixel Perfect -->
+    <section style="position: relative; width: 100%; overflow: hidden; background: #000;">
+        <!-- Grain/Noise Texture (opcional) -->
+        <div style="position: absolute; inset: 0; opacity: 0.08; mix-blend-mode: overlay; background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 400 400%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E'); background-repeat: repeat;"></div>
+        
+        <!-- Content Container -->
+        <div style="position: relative; z-index: 10; max-width: 1240px; margin: 0 auto; padding: 112px 24px;">
+            <!-- Grid Layout - Assimétrico -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 64px;">
+                
+                <!-- FORM CARD - Esquerda -->
+                <div style="grid-column: span 1;">
+                    <div style="background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 22px; padding: 28px; box-shadow: 0 20px 60px -15px rgba(0,0,0,0.3);">
+                        <!-- Header -->
+                        <div style="margin-bottom: 24px;">
+                            <div style="font-size: 12px; font-weight: 500; color: #ffffff; margin-bottom: 12px;">
+                                fabrica<sup style="font-size: 0.6em;">®</sup>
+                            </div>
+                            <h3 style="font-size: 28px; line-height: 1.2; font-weight: 600;">
+                                <span style="color: #ffffff;">Tem algum projeto</span><br>
+                                <span style="color: rgba(255, 255, 255, 0.6);">em mente?</span>
+                            </h3>
+                        </div>
+
+                        <!-- Form -->
+                        <form onsubmit="handleContactSubmit(event)" style="display: flex; flex-direction: column; gap: 16px;">
+                            <!-- Nome Input -->
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.8); margin-bottom: 6px;">
+                                    Sua ideia<span style="color: #ef4444;">*</span>
+                                </label>
+                                <input type="text" placeholder="João Ninguém" required
+                                    style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: none; border-radius: 12px; font-size: 14px; color: #ffffff; transition: all 0.2s;"
+                                    onfocus="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.boxShadow='0 0 0 2px rgba(255,255,255,0.1)';"
+                                    onblur="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';">
+                            </div>
+
+                            <!-- Email Input -->
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.8); margin-bottom: 6px;">
+                                    E-mail<span style="color: #ef4444;">*</span>
+                                </label>
+                                <input type="email" placeholder="ola@site.com" required
+                                    style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: none; border-radius: 12px; font-size: 14px; color: #ffffff; transition: all 0.2s;"
+                                    onfocus="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.boxShadow='0 0 0 2px rgba(255,255,255,0.1)';"
+                                    onblur="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';">
+                            </div>
+
+                            <!-- Mensagem Textarea -->
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.8); margin-bottom: 6px;">
+                                    Mensagem
+                                </label>
+                                <textarea placeholder="Sua mensagem" rows="4"
+                                    style="width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: none; border-radius: 12px; font-size: 14px; color: #ffffff; transition: all 0.2s; resize: none;"
+                                    onfocus="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.boxShadow='0 0 0 2px rgba(255,255,255,0.1)';"
+                                    onblur="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit"
+                                style="width: 100%; background: #ffffff; color: #000000; font-weight: 500; padding: 14px 24px; border-radius: 9999px; font-size: 14px; border: none; cursor: pointer; transition: all 0.2s;"
+                                onmouseover="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.boxShadow='0 10px 25px rgba(255,255,255,0.2)';"
+                                onmouseout="this.style.background='#ffffff'; this.style.boxShadow='none';"
+                                onmousedown="this.style.transform='scale(0.98)';"
+                                onmouseup="this.style.transform='scale(1)';">
+                                Enviar mensagem
+                            </button>
+
+                            <!-- Legal Text -->
+                            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.5); line-height: 1.5; margin-top: 4px;">
+                                Ao enviar, você concorda com nossos 
+                                <a href="#" style="text-decoration: underline; color: rgba(255, 255, 255, 0.5); transition: color 0.2s;" onmouseover="this.style.color='rgba(255, 255, 255, 0.8)'" onmouseout="this.style.color='rgba(255, 255, 255, 0.5)'">
+                                    Termos e Política de Privacidade
+                                </a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- TEXTO DIREITA -->
+                <div style="grid-column: span 1; padding-left: 0;">
+                    <!-- Main Headline -->
+                    <h2 style="font-size: 64px; font-weight: 800; line-height: 0.95; color: white; margin-bottom: 32px; letter-spacing: -0.02em;">
+                        Vamos<br>conversar.
+                    </h2>
+
+                    <!-- Subtexto -->
+                    <p style="color: #d1d5db; font-size: 18px; line-height: 1.6; max-width: 420px; margin-bottom: 48px;">
+                        Conte-nos sobre o seu projeto — seja ele um website, SEO ou marketing.
+                    </p>
+
+                    <!-- Blocos de Benefícios -->
+                    <div style="display: flex; flex-direction: column; gap: 32px;">
+                        <!-- Benefício 1 -->
+                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                            <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;">
+                                <svg style="width: 20px; height: 20px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="color: white; font-weight: 600; font-size: 16px; margin-bottom: 6px;">
+                                    Resposta rápida.
+                                </h3>
+                                <p style="color: #9ca3af; font-size: 14px; line-height: 1.5; max-width: 360px;">
+                                    Se você está pronto para criar e colaborar, adoraremos ouvir de você.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Benefício 2 -->
+                        <div style="display: flex; align-items: flex-start; gap: 16px;">
+                            <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;">
+                                <svg style="width: 20px; height: 20px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 style="color: white; font-weight: 600; font-size: 16px; margin-bottom: 6px;">
+                                    Esclareça os próximos passos.
+                                </h3>
+                                <p style="color: #9ca3af; font-size: 14px; line-height: 1.5; max-width: 360px;">
+                                    Iremos agendar formalmente um plano detalhado e um cronograma.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @media (min-width: 1024px) {
+            section[style*="position: relative; width: 100%"] > div > div[style*="display: grid"] {
+                grid-template-columns: 42% 58% !important;
+                gap: 80px !important;
+            }
+            section[style*="position: relative; width: 100%"] h2[style*="font-size: 64px"] {
+                font-size: 96px !important;
+            }
+            section[style*="position: relative; width: 100%"] > div > div > div:last-child {
+                padding-left: 16px !important;
+            }
+        }
+        
+        /* Placeholder styles */
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+    </style>
+
+    <script>
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = {
+                name: form[0].value,
+                email: form[1].value,
+                message: form[2].value
+            };
+            
+            console.log('Formulário enviado:', formData);
+            
+            // Animação de sucesso
+            const button = form.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = '✓ Mensagem enviada!';
+            button.style.background = '#10b981';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#111827';
+                form.reset();
+            }, 3000);
+        }
+    </script>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">fabrica®</div>
+                    <p class="footer-text">Studio</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#studio">Studio</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wa.me/5511999999999?text=Olá!%20Vim%20do%20site%20e%20quero%20fazer%20um%20orçamento" target="_blank">WhatsApp: (11) 99999-9999</a></li>
+                        <li><a href="mailto:contato@webstudiopro.com.br">contato@webstudiopro.com.br</a></li>
+                        <li>São Paulo, Brasil</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Social</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://wa.me/5511999999999?text=Olá!%20Vim%20do%20site%20e%20quero%20fazer%20um%20orçamento" target="_blank">WhatsApp</a></li>
+                        <li><a href="mailto:contato@webstudiopro.com.br">Email</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2025 fabrica® Studio. Todos os direitos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="https://wa.me/5511999999999?text=Olá!%20Vim%20do%20site%20e%20quero%20fazer%20um%20orçamento" target="_blank">Fale Conosco</a>
+                    <a href="#contact">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scroll for Links with offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect on scroll
+        let ticking = false;
+        function updateParallax() {
+            const currentScroll = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent && currentScroll < window.innerHeight) {
+                const parallax = currentScroll * 0.2;
+                heroContent.style.transform = `translateY(${parallax}px)`;
+                heroContent.style.opacity = Math.max(0.5, 1 - (currentScroll / window.innerHeight) * 0.3);
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Mouse move parallax for hero background
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { offsetWidth, offsetHeight } = hero;
+                const xPos = (clientX / offsetWidth - 0.5) * 20;
+                const yPos = (clientY / offsetHeight - 0.5) * 20;
+                
+                const bg1 = hero.querySelector('.hero-bg-1');
+                const bg2 = hero.querySelector('.hero-bg-2');
+                
+                if (bg1) bg1.style.transform = `translate(${xPos}px, ${yPos}px)`;
+                if (bg2) bg2.style.transform = `translate(${-xPos * 0.5}px, ${-yPos * 0.5}px)`;
+            });
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.stat-item, .service-item, .project-card, .about-item, .testimonial-card, .testimonial-stat, .pricing-card, .faq-item, .contact-form, .contact-info-section, .approach-editorial-left, .approach-editorial-right, .why-choose-kicker, .why-choose-headline, .why-choose-image-wrapper, .why-choose-description, .why-choose-card, .fabrica-card-large, .fabrica-card-metrics, .fabrica-card-pagespeed, .fabrica-card-visits').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate Fabrica chart bars when visible
+        const fabricaChartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.fabrica-bar-fill');
+                    bars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.transition = 'height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        }, index * 100);
+                    });
+                    fabricaChartObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const fabricaChart = document.querySelector('.fabrica-chart');
+        if (fabricaChart) {
+            fabricaChartObserver.observe(fabricaChart);
+        }
+
+        // Promo Popup (show after 3 seconds)
+        setTimeout(() => {
+            const popup = document.getElementById('promoPopup');
+            if (popup && !localStorage.getItem('promoClosed')) {
+                popup.style.display = 'flex';
+            }
+        }, 3000);
+
+        function closePromo() {
+            document.getElementById('promoPopup').style.display = 'none';
+            localStorage.setItem('promoClosed', 'true');
+        }
+
+        // Services Accordion Toggle
+        function toggleService(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.service-accordion-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // If clicked item was not active, open it
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.closest('.faq-item');
+                const isOpen = faqItem.classList.contains('open');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('open');
+                });
+                
+                // Open clicked item if it wasn't open
+                if (!isOpen) {
+                    faqItem.classList.add('open');
+                }
+            });
+        });
+
+        // Stagger animations for services
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.15}s`;
+        });
+
+        // Stagger animations for projects
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Stagger animations for testimonials
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        testimonialCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Smooth reveal on scroll with better timing
+        const revealElements = document.querySelectorAll('.service-item, .project-card, .about-item, .testimonial-card, .testimonial-stat, .pricing-card, .faq-item, .contact-form, .contact-info-section');
+        revealElements.forEach((el, index) => {
+            const delay = index * 0.05;
+            el.style.transitionDelay = `${delay}s`;
+        });
+
+
+        // Counter Animation
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (target >= 100 ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (target >= 100 ? '%' : '+');
+                }
+            }, 16);
+        }
+
+        // Observe counter elements
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.getAttribute('data-target')) {
+                    if (!entry.target.classList.contains('counted')) {
+                        entry.target.classList.add('counted');
+                        animateCounter(entry.target);
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.stat-value[data-target], h3[data-target]').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Contact Form WhatsApp Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const projectType = document.getElementById('projectType').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Build WhatsApp message
+            let whatsappMessage = `Olá! Vim do site e quero fazer um orçamento.\n\n`;
+            whatsappMessage += `Nome: ${name}\n`;
+            whatsappMessage += `WhatsApp: ${phone}\n`;
+            if (email) whatsappMessage += `Email: ${email}\n`;
+            if (projectType) whatsappMessage += `Tipo de Site: ${projectType}\n`;
+            if (message) whatsappMessage += `\nMensagem: ${message}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/5511999999999?text=${encodedMessage}`, '_blank');
+        }
+
+        // Pricing Toggle
+        const pricingToggles = document.querySelectorAll('.pricing-toggle-btn');
+        pricingToggles.forEach(btn => {
+            btn.addEventListener('click', function() {
+                pricingToggles.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Services Editorial Toggle
+        function toggleServiceEditorial(element) {
+            const serviceItem = element.closest('.service-editorial-item');
+            const toggleBtn = serviceItem.querySelector('.service-toggle-btn');
+            const isActive = serviceItem.classList.contains('active');
+            
+            // Fechar todos os outros
+            document.querySelectorAll('.service-editorial-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.service-toggle-btn').textContent = '+';
+            });
+            
+            // Toggle o clicado
+            if (!isActive) {
+                serviceItem.classList.add('active');
+                toggleBtn.textContent = '−';
+            } else {
+                serviceItem.classList.remove('active');
+                toggleBtn.textContent = '+';
+            }
+        }
+    </script>
+
+    <!-- Promo Popup -->
+    <div id="promoPopup" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 1rem; padding: 2rem; max-width: 400px; text-align: center; position: relative;">
+            <button onclick="closePromo()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem;">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                <i class="fas fa-gift"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem;">Oferta Especial! 🎉</h3>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem;">Ganhe <span style="color: #fbbf24; font-weight: 600;">20% OFF</span> no seu primeiro projeto</p>
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 1.5rem;">+ Consultoria Grátis de 1 hora</p>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20aproveitar%20a%20oferta%20de%2020%25%20OFF" target="_blank" class="btn-primary" style="width: 100%; text-align: center; text-decoration: none; display: block; margin-bottom: 1rem;">
+                <i class="fab fa-whatsapp"></i> Quero Aproveitar!
+            </a>
+            <p style="color: rgba(255, 255, 255, 0.4); font-size: 0.75rem;">Oferta válida por tempo limitado</p>
+        </div>
+    </div>
+</body>
+</html>

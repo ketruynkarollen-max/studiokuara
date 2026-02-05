@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor & Arte - Restaurante Gourmet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #aa8625;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            color: #333;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .preloader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-reserva {
+            padding: 0.9rem 2.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-reserva:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(212,175,55,0.3));
+            z-index: 1;
+        }
+
+        .hero-bg-1 {
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop') center/cover;
+        }
+
+        .hero-bg-2 {
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop') center/cover;
+        }
+
+        .hero-bg-3 {
+            background: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1920&h=1080&fit=crop') center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-text {
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 3px 3px 20px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-text p {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Slider Navigation */
+        .slider-nav {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            width: 40px;
+            border-radius: 6px;
+            background: var(--gold);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* About Section with Image Reveal */
+        .about {
+            padding: 120px 0;
+            background: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+            height: 600px;
+        }
+
+        .about-image {
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: all 0.5s;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .about-image-1 {
+            width: 70%;
+            height: 400px;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .about-image-2 {
+            width: 60%;
+            height: 350px;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .about-content h2 span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-box {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        .feature-box i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-box h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+            color: #999;
+            margin: 0;
+        }
+
+        /* Menu Section with Card Animations */
+        .menu {
+            padding: 120px 0;
+            background: #fff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: #999;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 30px 70px rgba(212, 175, 55, 0.25);
+        }
+
+        .menu-card-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .menu-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-card:hover .menu-card-image img {
+            transform: scale(1.15) rotate(3deg);
+        }
+
+        .menu-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-card-content {
+            padding: 2rem;
+        }
+
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .menu-card-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .menu-card:hover h3 {
+            color: var(--gold);
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .menu-card-content p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--light);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .order-btn:hover {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Delivery Section */
+        .delivery {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delivery::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .delivery::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+        }
+
+        .delivery-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .delivery-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .delivery-content p {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 3rem;
+        }
+
+        .delivery-apps {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .app-btn {
+            padding: 1.2rem 3rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid #fff;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .app-btn i {
+            font-size: 1.5rem;
+        }
+
+        .app-btn:hover {
+            background: #fff;
+            color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Instagram Section */
+        .instagram {
+            padding: 120px 0;
+            background: var(--light);
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .instagram-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .instagram-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .instagram-item:hover img {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), rgba(170, 134, 37, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .instagram-item:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        .instagram-overlay i {
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 120px 0;
+            background: #fff;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.5s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+
+        .blog-card-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.15);
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-date {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: var(--gold);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-card {
+            background: #fff;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.5s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.5rem;
+            color: #fff;
+            transition: all 0.5s;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: rotateY(360deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.7rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: #fff;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: #999;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-link {
+            width: 55px;
+            height: 55px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.3rem;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff;
+            transform: translateY(-5px) rotate(360deg);
+            border-color: transparent;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 35px rgba(37,211,102,0.7);
+        }
+
+        .whatsapp-float::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                height: 100%;
+                height: 100dvh;
+                padding-top: max(5rem, calc(70px + env(safe-area-inset-top)));
+                padding-left: 1rem;
+                padding-right: 1rem;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                width: 100%;
+                max-width: 100%;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 0.875rem 1rem;
+                min-height: 44px;
+                box-sizing: border-box;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+
+            .about-grid,
+            .menu-grid,
+            .blog-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-images {
+                height: 400px;
+            }
+
+            .section-header h2,
+            .about-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.25rem;
+                line-height: 1.2;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.75rem; }
+            .section-header h2, .about-content h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">Sabor & Arte</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Sabor & Arte</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#delivery">Delivery</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="btn-reserva" onclick="document.querySelector('.whatsapp-float').click()">
+                Fazer Reserva
+            </button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider" id="home">
+        <div class="hero-slide active hero-bg-1">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sabor Artesanal, Qualidade Insuperável</h1>
+                    <p>Explore nossa seleção de pratos gourmet e experiências gastronômicas autênticas</p>
+                    <div class="hero-buttons">
+                        <a href="#cardapio" class="btn btn-primary">
+                            <i class="fas fa-utensils"></i> Nosso Cardápio
+                        </a>
+                        <a href="#delivery" class="btn btn-secondary">
+                            <i class="fas fa-motorcycle"></i> Delivery
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide hero-bg-2">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sabores da Itália, Direto para Você</h1>
+                    <p>Desfrute da conveniência do nosso delivery e tenha a autêntica cozinha italiana na sua mesa</p>
+                    <div class="hero-buttons">
+                        <a href="#cardapio" class="btn btn-primary">
+                            <i class="fas fa-utensils"></i> Ver Cardápio
+                        </a>
+                        <a href="#delivery" class="btn btn-secondary">
+                            <i class="fas fa-calendar-check"></i> Reservar Mesa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide hero-bg-3">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Uma Experiência Gastronômica Inesquecível</h1>
+                    <p>Cada prato é uma obra de arte preparada com paixão e dedicação</p>
+                    <div class="hero-buttons">
+                        <a href="#cardapio" class="btn btn-primary">
+                            <i class="fas fa-utensils"></i> Explorar
+                        </a>
+                        <a href="#sobre" class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i> Saiba Mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-image about-image-1">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop" alt="Interior do Restaurante">
+                    </div>
+                    <div class="about-image about-image-2">
+                        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=700&h=500&fit=crop" alt="Pratos Gourmet">
+                    </div>
+                </div>
+                <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+                    <h2>Explore a Essência da <span>Culinária Italiana</span> Autêntica</h2>
+                    <p>Nossa história é marcada pela paixão de uma família que compartilha o amor pela cozinha italiana há décadas. Cada prato é preparado com ingredientes frescos e selecionados, seguindo receitas tradicionais transmitidas através de gerações.</p>
+                    <p>Sinta-se em casa enquanto navega em nossa seleção de massas frescas, produtos artesanais e delícias irresistíveis. Seja parte da nossa jornada gastronômica e descubra o verdadeiro sabor da Itália em cada pedaço.</p>
+                    <div class="about-features">
+                        <div class="feature-box" data-aos="zoom-in" data-aos-delay="100">
+                            <i class="fas fa-award"></i>
+                            <h4>Premiado</h4>
+                            <p>5 estrelas Michelin</p>
+                        </div>
+                        <div class="feature-box" data-aos="zoom-in" data-aos-delay="200">
+                            <i class="fas fa-leaf"></i>
+                            <h4>Orgânico</h4>
+                            <p>Ingredientes frescos</p>
+                        </div>
+                        <div class="feature-box" data-aos="zoom-in" data-aos-delay="300">
+                            <i class="fas fa-users"></i>
+                            <h4>Família</h4>
+                            <p>Ambiente acolhedor</p>
+                        </div>
+                        <div class="feature-box" data-aos="zoom-in" data-aos-delay="400">
+                            <i class="fas fa-cocktail"></i>
+                            <h4>Bar Premium</h4>
+                            <p>Drinks exclusivos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="cardapio">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">Explore Nosso <span>Cardápio</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100">Descubra os sabores que temos para oferecer</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=600&h=400&fit=crop" alt="Bruschetta Italiana">
+                        <span class="menu-badge">Destaque</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Bruschetta Italiana</h3>
+                            <span class="price">R$ 32</span>
+                        </div>
+                        <p>Pão italiano artesanal com tomates frescos, manjericão, azeite extra virgem e queijo burrata</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&h=400&fit=crop&q=80" alt="Carpaccio de Salmão">
+                        <span class="menu-badge">Novo</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Carpaccio de Salmão</h3>
+                            <span class="price">R$ 48</span>
+                        </div>
+                        <p>Lâminas finas de salmão fresco com alcaparras, limão siciliano e molho especial da casa</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=400&fit=crop" alt="Camarões ao Alho">
+                        <span class="menu-badge">Popular</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Camarões ao Alho</h3>
+                            <span class="price">R$ 54</span>
+                        </div>
+                        <p>Camarões grandes salteados em azeite com alho, vinho branco e ervas frescas</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=400&fit=crop" alt="Risoto de Funghi">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Risoto de Funghi</h3>
+                            <span class="price">R$ 62</span>
+                        </div>
+                        <p>Risoto cremoso com mix de cogumelos selvagens, parmesão e trufa branca</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=600&h=400&fit=crop" alt="Filé ao Molho Madeira">
+                        <span class="menu-badge">Chef</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Filé ao Molho Madeira</h3>
+                            <span class="price">R$ 78</span>
+                        </div>
+                        <p>Filé mignon grelhado ao ponto com molho madeira e batatas rústicas</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&h=400&fit=crop" alt="Tiramisu Clássico">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Tiramisu Clássico</h3>
+                            <span class="price">R$ 28</span>
+                        </div>
+                        <p>Sobremesa tradicional italiana com café, mascarpone e cacau</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=400&fit=crop" alt="Massa Carbonara">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Massa Carbonara</h3>
+                            <span class="price">R$ 52</span>
+                        </div>
+                        <p>Espaguete com bacon, ovos, parmesão e pimenta preta na receita original</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop" alt="Pizza Margherita">
+                        <span class="menu-badge">Tradicional</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3>Pizza Margherita</h3>
+                            <span class="price">R$ 45</span>
+                        </div>
+                        <p>Pizza artesanal com molho de tomate, mussarela de búfala e manjericão fresco</p>
+                        <button class="order-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao Pedido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Section -->
+    <section class="delivery" id="delivery">
+        <div class="container">
+            <div class="delivery-content">
+                <h2 data-aos="fade-up">Peça no Delivery</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Desfrute da autêntica cozinha italiana onde estiver! Experimente nosso serviço de entrega.</p>
+                <div class="delivery-apps" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#" class="app-btn">
+                        <i class="fas fa-motorcycle"></i>
+                        iFood
+                    </a>
+                    <a href="#" class="app-btn">
+                        <i class="fas fa-utensils"></i>
+                        Uber Eats
+                    </a>
+                    <a href="#" class="app-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section -->
+    <section class="instagram">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">Siga-nos no <span>Instagram</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100">Acompanhe nossa jornada gastronômica</p>
+            </div>
+            <div class="instagram-grid">
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=400&fit=crop&q=80" alt="Ambiente Restaurante">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="150">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop&q=80" alt="Pizza Gourmet">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=400&fit=crop&q=80" alt="Salada Fresca">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="250">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=400&fit=crop&q=80" alt="Massa Italiana">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=400&fit=crop&q=80" alt="Panquecas">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="150">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=400&fit=crop&q=80" alt="Bowl Saudável">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=400&fit=crop&q=80" alt="Drink Especial">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="instagram-item" data-aos="zoom-in" data-aos-delay="250">
+                    <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&h=400&fit=crop&q=80" alt="Sobremesa">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">Artigos do <span>Blog</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100">Dicas, receitas e histórias da nossa cozinha</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=400&fit=crop" alt="Blog 1">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-date"><i class="far fa-calendar"></i> 15 Jan, 2025</div>
+                        <h3>A Arte da Produção Artesanal de Massas</h3>
+                        <p>Descubra os segredos por trás da produção das nossas massas frescas e artesanais...</p>
+                        <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop" alt="Blog 2">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-date"><i class="far fa-calendar"></i> 12 Jan, 2025</div>
+                        <h3>Ingredientes Essenciais da Cozinha Italiana</h3>
+                        <p>Conheça os ingredientes que não podem faltar na autêntica culinária italiana...</p>
+                        <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop" alt="Blog 3">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-date"><i class="far fa-calendar"></i> 10 Jan, 2025</div>
+                        <h3>Uma Noite Italiana Perfeita em Casa</h3>
+                        <p>Dicas e truques para criar uma experiência gastronômica italiana em casa...</p>
+                        <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-aos="fade-up">Entre em <span>Contato</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100">Estamos à disposição para atendê-lo</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Localização</h3>
+                    <p>Av. Paulista, 1000<br>São Paulo - SP, CEP: 01310-100</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Telefone</h3>
+                    <p>(11) 3333-3333<br>Segunda a Domingo: 11h - 23h</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>E-mail</h3>
+                    <p>contato@saborearte.com.br<br>reservas@saborearte.com.br</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Sabor & Arte</div>
+                <p class="footer-text">Uma experiência gastronômica inesquecível</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Sabor & Arte. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20fazer%20uma%20reserva" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Auto advance slides
+        setInterval(nextSlide, 5000);
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Order button functionality
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const dishName = this.closest('.menu-card-content').querySelector('h3').textContent;
+                showNotification(`${dishName} adicionado ao carrinho!`);
+            });
+        });
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+                color: white;
+                padding: 1.5rem 2.5rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(212, 175, 55, 0.5);
+                z-index: 9999;
+                animation: slideIn 0.5s ease;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
